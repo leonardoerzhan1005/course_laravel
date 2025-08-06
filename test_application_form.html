@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест анкеты регистрации на курсы</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
+    <style>
+        .application-form-wrapper {
+            background: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            margin: 20px;
+        }
+        .form-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .form-control {
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            padding: 12px 15px;
+            transition: border-color 0.3s ease;
+        }
+        .form-control:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 0.2rem rgba(52, 152, 219, 0.25);
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+        }
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .form-check-input {
+            width: 18px;
+            height: 18px;
+        }
+        .form-submit {
+            margin-top: 40px;
+        }
+        .btn-primary {
+            background: #3498db;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+        .select2-container--default .select2-selection--multiple {
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            min-height: 45px;
+        }
+        .select2-container--default .select2-selection--multiple:focus {
+            border-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-xl-10">
+                <div class="application-form-wrapper">
+                    <div class="section-title text-center mb-5">
+                        <h2 class="title">Анкета регистрации на курсы повышения квалификации</h2>
+                        <p class="text">Заполните все поля для подачи заявки на курс повышения квалификации</p>
+                    </div>
+
+                    <form method="POST" action="#" class="application-form">
+                        <!-- Личные данные (кириллица) -->
+                        <div class="form-section">
+                            <h4 class="section-title">Личные данные (кириллица)</h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="last_name_cyrillic">Фамилия *</label>
+                                        <input type="text" id="last_name_cyrillic" name="last_name_cyrillic" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="first_name_cyrillic">Имя *</label>
+                                        <input type="text" id="first_name_cyrillic" name="first_name_cyrillic" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="middle_name_cyrillic">Отчество *</label>
+                                        <input type="text" id="middle_name_cyrillic" name="middle_name_cyrillic" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Личные данные (латиница) -->
+                        <div class="form-section">
+                            <h4 class="section-title">Личные данные (латиница)</h4>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="last_name_latin">Фамилия *</label>
+                                        <input type="text" id="last_name_latin" name="last_name_latin" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="first_name_latin">Имя *</label>
+                                        <input type="text" id="first_name_latin" name="first_name_latin" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="middle_name_latin">Отчество *</label>
+                                        <input type="text" id="middle_name_latin" name="middle_name_latin" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Гражданство -->
+                        <div class="form-section">
+                            <h4 class="section-title">Гражданство</h4>
+                            <div class="form-group">
+                                <label>Вы иностранный гражданин? *</label>
+                                <div class="radio-group">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_foreign_citizen" 
+                                               id="foreign_yes" value="1" required>
+                                        <label class="form-check-label" for="foreign_yes">Да</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="is_foreign_citizen" 
+                                               id="foreign_no" value="0" required>
+                                        <label class="form-check-label" for="foreign_no">Нет</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Контактная информация -->
+                        <div class="form-section">
+                            <h4 class="section-title">Контактная информация</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="email">E-mail *</label>
+                                        <input type="email" id="email" name="email" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="phone">Мобильный телефон *</label>
+                                        <input type="tel" id="phone" name="phone" 
+                                               class="form-control" 
+                                               placeholder="+7 (XXX) XXX-XX-XX" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Образование и работа -->
+                        <div class="form-section">
+                            <h4 class="section-title">Образование и работа</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="course_direction">Направление курса *</label>
+                                        <input type="text" id="course_direction" name="course_direction" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="workplace">Место работы *</label>
+                                        <input type="text" id="workplace" name="workplace" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="country_id">Страна *</label>
+                                        <select id="country_id" name="country_id" class="form-control" required>
+                                            <option value="">Выберите страну</option>
+                                            <option value="1">Россия</option>
+                                            <option value="2">Казахстан</option>
+                                            <option value="3">Беларусь</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="city_id">Город *</label>
+                                        <select id="city_id" name="city_id" class="form-control" required>
+                                            <option value="">Сначала выберите страну</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="institution_category">Категория учреждения *</label>
+                                        <select id="institution_category" name="institution_category" class="form-control" required>
+                                            <option value="">Выберите категорию</option>
+                                            <option value="school">Школа</option>
+                                            <option value="college">Колледж</option>
+                                            <option value="university">Университет</option>
+                                            <option value="institute">Институт</option>
+                                            <option value="other">Другое</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6" id="other_institution_type_div" style="display: none;">
+                                    <div class="form-group">
+                                        <label for="other_institution_type">Другой тип учреждения *</label>
+                                        <input type="text" id="other_institution_type" name="other_institution_type" 
+                                               class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="academic_degree">Учёная степень *</label>
+                                        <select id="academic_degree" name="academic_degree" class="form-control" required>
+                                            <option value="">Выберите степень</option>
+                                            <option value="bachelor">Бакалавр</option>
+                                            <option value="master">Магистр</option>
+                                            <option value="phd">Кандидат наук</option>
+                                            <option value="doctor">Доктор наук</option>
+                                            <option value="none">Нет степени</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="position">Должность *</label>
+                                        <input type="text" id="position" name="position" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="teaching_subjects">Преподаваемые предметы *</label>
+                                        <select id="teaching_subjects" name="teaching_subjects[]" 
+                                                class="form-control select2" multiple required>
+                                            <option value="mathematics">Математика</option>
+                                            <option value="physics">Физика</option>
+                                            <option value="chemistry">Химия</option>
+                                            <option value="biology">Биология</option>
+                                            <option value="history">История</option>
+                                            <option value="literature">Литература</option>
+                                            <option value="english">Английский язык</option>
+                                            <option value="russian">Русский язык</option>
+                                            <option value="geography">География</option>
+                                            <option value="computer_science">Информатика</option>
+                                            <option value="art">ИЗО</option>
+                                            <option value="music">Музыка</option>
+                                            <option value="physical_education">Физкультура</option>
+                                            <option value="other">Другое</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Курс и даты -->
+                        <div class="form-section">
+                            <h4 class="section-title">Курс и даты</h4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="course_id">Курс повышения квалификации *</label>
+                                        <select id="course_id" name="course_id" class="form-control" required>
+                                            <option value="">Выберите курс</option>
+                                            <option value="1">Курс 1</option>
+                                            <option value="2">Курс 2</option>
+                                            <option value="3">Курс 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="specialty_id">Специальность *</label>
+                                        <select id="specialty_id" name="specialty_id" class="form-control" required>
+                                            <option value="">Сначала выберите курс</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="course_language">Язык прохождения курса *</label>
+                                        <select id="course_language" name="course_language" class="form-control" required>
+                                            <option value="">Выберите язык</option>
+                                            <option value="russian">Русский</option>
+                                            <option value="english">Английский</option>
+                                            <option value="kazakh">Казахский</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="seminar_start_date">Дата начала семинара *</label>
+                                        <input type="date" id="seminar_start_date" name="seminar_start_date" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="seminar_end_date">Дата окончания семинара *</label>
+                                        <input type="date" id="seminar_end_date" name="seminar_end_date" 
+                                               class="form-control" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-submit text-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Отправить заявку</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    
+    <script>
+    $(document).ready(function() {
+        // Инициализация Select2
+        $('.select2').select2({
+            placeholder: 'Выберите предметы',
+            allowClear: true
+        });
+
+        // Обработка изменения страны
+        $('#country_id').change(function() {
+            var countryId = $(this).val();
+            var citySelect = $('#city_id');
+            
+            citySelect.html('<option value="">Загрузка...</option>');
+            
+            if (countryId) {
+                // Симуляция загрузки городов
+                setTimeout(function() {
+                    citySelect.html('<option value="">Выберите город</option>');
+                    if (countryId == 1) {
+                        citySelect.append('<option value="1">Москва</option>');
+                        citySelect.append('<option value="2">Санкт-Петербург</option>');
+                        citySelect.append('<option value="3">Новосибирск</option>');
+                    } else if (countryId == 2) {
+                        citySelect.append('<option value="4">Алматы</option>');
+                        citySelect.append('<option value="5">Астана</option>');
+                        citySelect.append('<option value="6">Шымкент</option>');
+                    } else if (countryId == 3) {
+                        citySelect.append('<option value="7">Минск</option>');
+                        citySelect.append('<option value="8">Гомель</option>');
+                        citySelect.append('<option value="9">Могилев</option>');
+                    }
+                }, 500);
+            } else {
+                citySelect.html('<option value="">Сначала выберите страну</option>');
+            }
+        });
+
+        // Обработка изменения курса
+        $('#course_id').change(function() {
+            var courseId = $(this).val();
+            var specialtySelect = $('#specialty_id');
+            
+            specialtySelect.html('<option value="">Загрузка...</option>');
+            
+            if (courseId) {
+                // Симуляция загрузки специальностей
+                setTimeout(function() {
+                    specialtySelect.html('<option value="">Выберите специальность</option>');
+                    specialtySelect.append('<option value="1">Информационные технологии</option>');
+                    specialtySelect.append('<option value="2">Педагогика</option>');
+                    specialtySelect.append('<option value="3">Медицина</option>');
+                    specialtySelect.append('<option value="4">Экономика</option>');
+                    specialtySelect.append('<option value="5">Юриспруденция</option>');
+                }, 500);
+            } else {
+                specialtySelect.html('<option value="">Сначала выберите курс</option>');
+            }
+        });
+
+        // Обработка изменения категории учреждения
+        $('#institution_category').change(function() {
+            var category = $(this).val();
+            if (category === 'other') {
+                $('#other_institution_type_div').show();
+                $('#other_institution_type').prop('required', true);
+            } else {
+                $('#other_institution_type_div').hide();
+                $('#other_institution_type').prop('required', false);
+            }
+        });
+
+        // Маска для телефона
+        $('#phone').mask('+7 (000) 000-00-00');
+
+        // Валидация дат
+        $('#seminar_end_date').change(function() {
+            var startDate = $('#seminar_start_date').val();
+            var endDate = $(this).val();
+            
+            if (startDate && endDate && startDate >= endDate) {
+                alert('Дата окончания должна быть после даты начала');
+                $(this).val('');
+            }
+        });
+
+        // Обработка отправки формы
+        $('form').submit(function(e) {
+            e.preventDefault();
+            alert('Форма отправлена! В реальном приложении данные будут отправлены на сервер.');
+        });
+    });
+    </script>
+</body>
+</html> 
