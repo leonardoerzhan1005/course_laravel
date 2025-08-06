@@ -160,3 +160,130 @@
         $('.wpcc-container').fadeOut(1000);
     });
 </script>
+
+{{-- Custom Bootstrap Menu JavaScript --}}
+<script>
+    $(document).ready(function() {
+        // Auto-submit language and currency forms
+        $('#setLanguageHeader select').on('change', function() {
+            $(this).closest('form').submit();
+        });
+        
+        $('.change-currency').on('change', function() {
+            $(this).closest('form').submit();
+        });
+        
+        // Mobile menu improvements
+        $('.navbar-toggler').on('click', function() {
+            $('.navbar-collapse').slideToggle(300);
+        });
+        
+        // Close mobile menu when clicking outside
+        $(document).on('click', function(e) {
+            if (!$(e.target).closest('.navbar').length) {
+                $('.navbar-collapse').collapse('hide');
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        $('a[href^="#"]').on('click', function(e) {
+            e.preventDefault();
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 80
+                }, 800);
+            }
+        });
+        
+        // Add active class to current nav item
+        var currentPath = window.location.pathname;
+        $('.navbar-nav .nav-link').each(function() {
+            var linkPath = $(this).attr('href');
+            if (linkPath && currentPath.includes(linkPath) && linkPath !== '/') {
+                $(this).addClass('active');
+            }
+        });
+        
+        // Dropdown hover effect (desktop only)
+        if (window.innerWidth > 991) {
+            $('.dropdown').hover(
+                function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeIn(300);
+                },
+                function() {
+                    $(this).find('.dropdown-menu').stop(true, true).delay(200).fadeOut(300);
+                }
+            );
+        }
+        
+        // Search form improvements
+        $('.navbar .input-group').on('submit', function(e) {
+            var searchInput = $(this).find('input[name="search"]');
+            var categorySelect = $(this).find('select[name="main_category"]');
+            
+            if (!searchInput.val().trim() && categorySelect.val() === 'Categories') {
+                e.preventDefault();
+                toastr.warning('Please enter a search term or select a category');
+                return false;
+            }
+        });
+        
+        // Logout functionality
+        $('.logout-btn').on('click', function(e) {
+            e.preventDefault();
+            if (confirm('Are you sure you want to logout?')) {
+                $('#logout-form').submit();
+            }
+        });
+        
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+        
+        // Navbar scroll effect
+        $(window).on('scroll', function() {
+            if ($(window).scrollTop() > 50) {
+                $('.navbar').addClass('navbar-scrolled');
+            } else {
+                $('.navbar').removeClass('navbar-scrolled');
+            }
+        });
+    });
+</script>
+
+<style>
+    /* Navbar scroll effect */
+    .navbar-scrolled {
+        background: rgba(255, 255, 255, 0.95) !important;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 20px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Loading animation for forms */
+    .form-submitting {
+        opacity: 0.7;
+        pointer-events: none;
+    }
+    
+    .form-submitting::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 20px;
+        height: 20px;
+        margin: -10px 0 0 -10px;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid var(--tg-theme-primary);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+</style>

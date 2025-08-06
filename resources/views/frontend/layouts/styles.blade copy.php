@@ -27,9 +27,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/rtl.css') }}?v={{ $setting?->version }}">
 @endif
 
-<!-- Custom Styles -->
-@vite(['resources/css/custom.css'])
-
 {{-- Dynamic root colors --}}
 <style>
     :root {

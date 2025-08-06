@@ -1,0 +1,452 @@
+/* Bootstrap Button Override Styles */
+/* Переопределение стилей кнопок на обычный Bootstrap стиль */
+
+.btn {
+    /* Основные Bootstrap стили */
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    
+    /* Убираем кастомные стили */
+    box-shadow: none !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    white-space: normal !important;
+    overflow: visible !important;
+}
+
+/* Primary Button - используем #1d4ed8 */
+.btn-primary {
+    color: #fff;
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #1e40af;
+    border-color: #1e3a8a;
+}
+
+.btn-primary:focus,
+.btn-primary.focus {
+    color: #fff;
+    background-color: #1e40af;
+    border-color: #1e3a8a;
+    box-shadow: 0 0 0 0.25rem rgba(29, 78, 216, 0.25);
+}
+
+/* Secondary Button */
+.btn-secondary {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    color: #fff;
+    background-color: #5c636a;
+    border-color: #565e64;
+}
+
+.btn-secondary:focus,
+.btn-secondary.focus {
+    color: #fff;
+    background-color: #5c636a;
+    border-color: #565e64;
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+/* Success Button */
+.btn-success {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-success:hover {
+    color: #fff;
+    background-color: #157347;
+    border-color: #146c43;
+}
+
+.btn-success:focus,
+.btn-success.focus {
+    color: #fff;
+    background-color: #157347;
+    border-color: #146c43;
+    box-shadow: 0 0 0 0.25rem rgba(25, 135, 84, 0.25);
+}
+
+/* Danger Button */
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    color: #fff;
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+}
+
+.btn-danger:focus,
+.btn-danger.focus {
+    color: #fff;
+    background-color: #bb2d3b;
+    border-color: #b02a37;
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25);
+}
+
+/* Warning Button */
+.btn-warning {
+    color: #000;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-warning:hover {
+    color: #000;
+    background-color: #ffca2c;
+    border-color: #ffc720;
+}
+
+.btn-warning:focus,
+.btn-warning.focus {
+    color: #000;
+    background-color: #ffca2c;
+    border-color: #ffc720;
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+}
+
+/* Info Button */
+.btn-info {
+    color: #000;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+}
+
+.btn-info:hover {
+    color: #000;
+    background-color: #31d2f2;
+    border-color: #25cff2;
+}
+
+.btn-info:focus,
+.btn-info.focus {
+    color: #000;
+    background-color: #31d2f2;
+    border-color: #25cff2;
+    box-shadow: 0 0 0 0.25rem rgba(13, 202, 240, 0.25);
+}
+
+/* Light Button */
+.btn-light {
+    color: #000;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btn-light:hover {
+    color: #000;
+    background-color: #f9fafb;
+    border-color: #f9fafb;
+}
+
+.btn-light:focus,
+.btn-light.focus {
+    color: #000;
+    background-color: #f9fafb;
+    border-color: #f9fafb;
+    box-shadow: 0 0 0 0.25rem rgba(248, 249, 250, 0.25);
+}
+
+/* Dark Button */
+.btn-dark {
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+
+.btn-dark:hover {
+    color: #fff;
+    background-color: #1a1d20;
+    border-color: #171a1d;
+}
+
+.btn-dark:focus,
+.btn-dark.focus {
+    color: #fff;
+    background-color: #1a1d20;
+    border-color: #171a1d;
+    box-shadow: 0 0 0 0.25rem rgba(33, 37, 41, 0.25);
+}
+
+/* Outline Buttons */
+.btn-outline-primary {
+    color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-outline-secondary {
+    color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-outline-success {
+    color: #198754;
+    border-color: #198754;
+}
+
+.btn-outline-success:hover {
+    color: #fff;
+    background-color: #198754;
+    border-color: #198754;
+}
+
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-outline-warning {
+    color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+    color: #000;
+    background-color: #ffc107;
+    border-color: #ffc107;
+}
+
+.btn-outline-info {
+    color: #0dcaf0;
+    border-color: #0dcaf0;
+}
+
+.btn-outline-info:hover {
+    color: #000;
+    background-color: #0dcaf0;
+    border-color: #0dcaf0;
+}
+
+.btn-outline-light {
+    color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btn-outline-light:hover {
+    color: #000;
+    background-color: #f8f9fa;
+    border-color: #f8f9fa;
+}
+
+.btn-outline-dark {
+    color: #212529;
+    border-color: #212529;
+}
+
+.btn-outline-dark:hover {
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
+}
+
+/* Button Sizes */
+.btn-lg {
+    padding: 0.5rem 1rem;
+    font-size: 1.25rem;
+    border-radius: 0.5rem;
+}
+
+.btn-sm {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.25rem;
+}
+
+/* Disabled State */
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.65;
+    pointer-events: none;
+}
+
+/* Focus States */
+.btn:focus,
+.btn.focus {
+    outline: 0;
+}
+
+/* Active States */
+.btn:active,
+.btn.active {
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+/* Button Groups */
+.btn-group > .btn {
+    position: relative;
+    flex: 1 1 auto;
+}
+
+.btn-group > .btn:hover {
+    z-index: 1;
+}
+
+.btn-group > .btn:focus,
+.btn-group > .btn:active,
+.btn-group > .btn.active {
+    z-index: 1;
+}
+
+/* Переопределяем кастомные классы кнопок */
+.btn.btn-border {
+    background-color: transparent;
+    border: 1px solid #1d4ed8;
+    color: #1d4ed8;
+    padding: 0.375rem 0.75rem;
+    border-radius: 0.375rem;
+    box-shadow: none;
+}
+
+.btn.btn-border:hover {
+    background-color: #1d4ed8;
+    color: #fff;
+    border-color: #1d4ed8;
+}
+
+.btn.white-btn {
+    background-color: #fff;
+    color: #212529;
+    border-color: #dee2e6;
+}
+
+.btn.white-btn:hover {
+    background-color: #f8f9fa;
+    color: #212529;
+    border-color: #dee2e6;
+}
+
+.btn-two {
+    background-color: var(--tg-theme-secondary);
+    color: #000;
+    border: 1px solid var(--tg-theme-secondary);
+    box-shadow: none;
+    border-radius: 0.375rem;
+}
+
+.btn-two:hover {
+    background-color: #e6b800;
+    border-color: #e6b800;
+    color: #000;
+}
+
+.btn-three {
+    background-color: #6c757d;
+    color: #fff;
+    border-color: #6c757d;
+    box-shadow: none;
+    border-radius: 0.375rem;
+}
+
+.btn-three:hover {
+    background-color: #5c636a;
+    border-color: #565e64;
+    color: #fff;
+}
+
+.btn-four {
+    background-color: #198754;
+    color: #fff;
+    border-color: #198754;
+    box-shadow: none;
+    border-radius: 0.375rem;
+}
+
+.btn-four:hover {
+    background-color: #157347;
+    border-color: #146c43;
+    color: #fff;
+}
+
+/* Arrow Button */
+.arrow-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.15s ease-in-out;
+    box-shadow: none;
+    border-radius: 0.375rem;
+}
+
+.arrow-btn:hover {
+    transform: translateX(5px);
+}
+
+/* Убираем кастомные тени и эффекты */
+.btn,
+.btn:hover,
+.btn:focus,
+.btn:active {
+    box-shadow: none !important;
+}
+
+/* Переопределяем SVG стили */
+.btn svg {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+}
+
+.btn .svg-icon {
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    display: inline-block;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767.98px) {
+    .btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .btn-lg {
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+    }
+} 
