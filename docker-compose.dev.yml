@@ -1,0 +1,108 @@
+
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: skillgro_app_dev
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+      - ./storage:/var/www/html/storage
+      - ./public/uploads:/var/www/html/public/uploads
+    environment:
+      - APP_ENV=local
+      - APP_DEBUG=true
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=lms_system
+      - DB_USERNAME=erzhan
+      - DB_PASSWORD=!Gro@2025
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    networks:
+      - skillgro_dev_network
+
+  mysql:
+    image: mysql:8.0
+    container_name: skillgro_mysql_dev
+    restart: unless-stopped
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_DATABASE: lms_system
+      MYSQL_ROOT_PASSWORD: root_password
+    volumes:
+      - mysql_dev_data:/var/lib/mysql
+      - ./docker/mysql/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+    networks:
+      - skillgro_dev_network
+
+  redis:
+    image: redis:7-alpine
+    container_name: skillgro_redis_dev
+    restart: unless-stopped
+    ports:
+      - "6380:6379"
+    volumes:
+      - redis_dev_data:/data
+    networks:
+      - skillgro_dev_network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: skillgro_phpmyadmin_dev
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: erzhan
+      PMA_PASSWORD: !Gro@2025
+      PMA_ARBITRARY: 1
+      UPLOAD_LIMIT: 100M
+      MEMORY_LIMIT: 512M
+      MAX_EXECUTION_TIME: 300
+    volumes:
+      - ./docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - skillgro_dev_network
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: skillgro_mailhog_dev
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - skillgro_dev_network
+
+volumes:
+  mysql_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local
+
+networks:
+  skillgro_dev_network:
+    driver: bridge 
+
+    

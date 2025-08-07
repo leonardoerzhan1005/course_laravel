@@ -99,15 +99,15 @@
                 @if ($nav_menu)
                     @foreach ($nav_menu->menuItems as $menu)
                         @if ($menu?->link == '/' && $setting?->show_all_homepage == 1)
-                            <div class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="{{ url('/') }}" role="button" data-bs-toggle="dropdown">
+                            <div class="nav-item ">
+                                <a class="nav-link " href="{{ url('/') }}" role="button" >
                                     {{ __('Home') }}
                                 </a>
-                                <ul class="dropdown-menu">
+                                <!-- <ul class="dropdown-menu">
                                     @foreach (App\Enums\ThemeList::cases() as $theme)
                                         <li><a class="dropdown-item" href="{{ route('change-theme', $theme->value) }}">{{ __($theme->value) }}</a></li>
                                     @endforeach
-                                </ul>
+                                </ul> -->
                             </div>
                         @else
                             @if ($menu->child && count($menu->child))
