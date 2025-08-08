@@ -33,12 +33,12 @@ MAILHOG_WEB_PORT=8025
 EOF
 fi
 
-# Stop and remove existing containers
+# Stop existing containers
 echo "🛑 Stopping existing containers..."
 docker-compose -f docker-compose.dev.yml down
 
-# Remove volumes to ensure fresh start
-echo "🗑️  Removing volumes..."
+# Remove volumes to ensure fresh start (optional - comment out if you want to keep data)
+echo "🗑️  Removing volumes for fresh start..."
 docker volume rm main_files_mysql_dev_data main_files_redis_dev_data 2>/dev/null || true
 
 # Start containers
@@ -66,7 +66,16 @@ fi
 echo "⏳ Waiting for all services to be ready..."
 sleep 10
 
-# Run Laravel setup commands
+# Test database connection
+echo "🔍 Testing database connection..."
+if docker-compose -f docker-compose.dev.yml exec -T mysql mysql -u erzhan -p'!Gro@2025' -e "USE lms_system; SELECT 1;" > /dev/null 2>&1; then
+    echo "✅ Database connection successful!"
+else
+    echo "❌ Database connection failed!"
+    exit 1
+fi
+
+# Run Laravel setup commands (only if needed)
 echo "⚙️  Setting up Laravel..."
 
 # Check if app container is ready
@@ -75,9 +84,8 @@ if ! docker-compose -f docker-compose.dev.yml exec -T app php --version > /dev/n
     exit 1
 fi
 
-# Run Laravel commands
+# Run Laravel commands (with error handling)
 docker-compose -f docker-compose.dev.yml exec -T app php artisan key:generate --force || echo "⚠️  Key generation failed (may already exist)"
-docker-compose -f docker-compose.dev.yml exec -T app php artisan migrate --force || echo "⚠️  Migration failed"
 docker-compose -f docker-compose.dev.yml exec -T app php artisan storage:link --force || echo "⚠️  Storage link failed"
 docker-compose -f docker-compose.dev.yml exec -T app php artisan config:cache || echo "⚠️  Config cache failed"
 docker-compose -f docker-compose.dev.yml exec -T app php artisan route:cache || echo "⚠️  Route cache failed"
@@ -94,3 +102,8 @@ docker-compose -f docker-compose.dev.yml ps
 echo ""
 echo "🔍 To check logs: docker-compose -f docker-compose.dev.yml logs -f"
 echo "🛑 To stop: docker-compose -f docker-compose.dev.yml down"
+echo ""
+echo "💡 For production deployment:"
+echo "   1. Copy docker.env to docker.env.production"
+echo "   2. Update variables for production"
+echo "   3. Run: docker-compose -f docker-compose.yml --env-file docker.env.production up -d"
