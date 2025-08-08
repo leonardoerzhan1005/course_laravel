@@ -10,6 +10,7 @@ services:
     restart: unless-stopped
     ports:
       - "8080:80"
+      
     volumes:
       - ./storage:/var/www/html/storage
       - ./public/uploads:/var/www/html/public/uploads
