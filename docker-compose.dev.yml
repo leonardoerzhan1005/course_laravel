@@ -73,12 +73,13 @@ services:
     environment:
       PMA_HOST: mysql
       PMA_PORT: 3306
-      PMA_USER: ${DB_USERNAME:-erzhan}
-      PMA_PASSWORD: ${DB_PASSWORD:-!Gro@2025}
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
       PMA_ARBITRARY: 1
       UPLOAD_LIMIT: 100M
       MEMORY_LIMIT: 512M
       MAX_EXECUTION_TIME: 300
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_password}
     volumes:
       - ./docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
     depends_on:
