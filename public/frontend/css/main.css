@@ -50,7 +50,7 @@
     --tg-heading-line-height: 1.3;
     --tg-body-color: #6D6C80;
     --tg-heading-color: #161439;
-    --tg-theme-primary: #1e40af;
+    --tg-theme-primary: #1E3A8A;
     --tg-theme-secondary: #FFC224;
     --tg-common-color-blue: #050071;
     --tg-common-color-blue-2: #282568;
@@ -15708,11 +15708,11 @@ textarea {
 }
 
 .features__item-wrap .row [class*=col-]:nth-child(2) .features__item-two .features__icon-two {
-    background: #1e40af;
+    background: #1E3A8A;
 }
 
 .features__item-wrap .row [class*=col-]:nth-child(2) .features__item-two:hover .features__item-shape {
-    color: #1e40af;
+    color: #1E3A8A;
 }
 
 .features__item-wrap .row [class*=col-]:nth-child(3) .features__item-two {

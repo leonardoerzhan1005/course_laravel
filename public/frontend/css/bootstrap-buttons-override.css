@@ -27,23 +27,23 @@
     overflow: visible !important;
 }
 
-/* Primary Button - используем #1d4ed8 */
+/* Primary Button - используем #1E3A8A */
 .btn-primary {
     color: #fff;
-    background-color: #1d4ed8;
-    border-color: #1d4ed8;
+    background-color: #1E3A8A;
+    border-color: #1E3A8A;
 }
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #1e40af;
+    background-color: #1E3A8A;
     border-color: #1e3a8a;
 }
 
 .btn-primary:focus,
 .btn-primary.focus {
     color: #fff;
-    background-color: #1e40af;
+    background-color: #1E3A8A;
     border-color: #1e3a8a;
     box-shadow: 0 0 0 0.25rem rgba(29, 78, 216, 0.25);
 }
@@ -197,14 +197,14 @@
 
 /* Outline Buttons */
 .btn-outline-primary {
-    color: #1d4ed8;
-    border-color: #1d4ed8;
+    color: #1E3A8A;
+    border-color: #1E3A8A;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: #1d4ed8;
-    border-color: #1d4ed8;
+    background-color: #1E3A8A;
+    border-color: #1E3A8A;
 }
 
 .btn-outline-secondary {
@@ -335,17 +335,17 @@
 /* Переопределяем кастомные классы кнопок */
 .btn.btn-border {
     background-color: transparent;
-    border: 1px solid #1d4ed8;
-    color: #1d4ed8;
+    border: 1px solid #1E3A8A;
+    color: #1E3A8A;
     padding: 0.375rem 0.75rem;
     border-radius: 0.375rem;
     box-shadow: none;
 }
 
 .btn.btn-border:hover {
-    background-color: #1d4ed8;
+    background-color: #1E3A8A;
     color: #fff;
-    border-color: #1d4ed8;
+    border-color: #1E3A8A;
 }
 
 .btn.white-btn {

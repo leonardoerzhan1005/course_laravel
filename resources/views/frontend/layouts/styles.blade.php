@@ -33,7 +33,7 @@
 {{-- Dynamic root colors --}}
 <style>
     :root {
-        --tg-theme-primary: #1d4ed8;
+        --tg-theme-primary: #1E3A8A;
         --tg-theme-secondary: {{ $setting->secondary_color }};
         --tg-common-color-blue: {{ $setting->common_color_one }};
         --tg-common-color-blue-2: {{ $setting->common_color_two }};
@@ -73,13 +73,13 @@
     }
     
     .navbar .btn-primary {
-        background-color: #1d4ed8;
-        border-color: #1d4ed8;
+        background-color: #1E3A8A;
+        border-color: #1E3A8A;
     }
     
     .navbar .btn-primary:hover {
-        background-color: #1e40af;
-        border-color: #1e3a8a;
+        background-color: #1E3A8A;
+        border-color: #1E3A8A;
         color: white;
     }
     
@@ -97,7 +97,7 @@
     }
     
     .dropdown-item:hover {
-        background-color: #1d4ed8;
+        background-color: #1E3A8A;
         color: white;
         transform: translateX(5px);
     }
@@ -112,7 +112,7 @@
     }
     
     .navbar-nav .nav-link:hover {
-        background-color: #1d4ed8;
+        background-color: #1E3A8A;
         color: white !important;
     }
     

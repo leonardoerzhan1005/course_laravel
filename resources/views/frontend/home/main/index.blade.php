@@ -6,43 +6,35 @@
 
 @section('contents')
     <!-- Hero Section -->
-    <section class="hero-section position-relative overflow-hidden">
-        <div class="hero-bg" style="background: linear-gradient(135deg, #1F3A8A 0%, #2E5AA0 100%);"></div>
-        <div class="container position-relative">
-            <div class="row align-items-center min-vh-75">
-                <div class="col-lg-6 text-white">
+    <section class="hero-section position-relative">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
                     <!-- Логотипы -->
-                    <div class="hero-logos mb-4">
-                        <div class="d-flex align-items-center gap-4">
+                    <div class="hero-logos mb-5">
+                        <div class="d-flex align-items-center justify-content-center gap-5">
                             <img src="{{ asset('frontend/img/farabi_logo.png') }}" alt="FARABI Logo" class="hero-logo farabi-logo">
                             <img src="{{ asset('frontend/img/ipk_logo.png') }}" alt="IPK Logo" class="hero-logo ipk-logo">
                         </div>
                     </div>
                     
-                    <h1 class="display-4 fw-bold mb-4 text-white">{{ __('home.hero_title') }}</h1>
-                    <p class="lead mb-5 text-white">{{ __('home.hero_subtitle') }}</p>
-                    <div class="d-flex gap-3 flex-wrap">
-                        <a href="{{ route('application-form') }}" class="btn btn-light btn-lg px-5 py-3 fw-semibold text-dark">
+                    <!-- Заголовок -->
+                    <h1 class="hero-title mb-4">{{ __('home.hero_title') }}</h1>
+                    
+                    <!-- Описание -->
+                    <p class="hero-description mb-5">{{ __('home.hero_subtitle') }}</p>
+                    
+                    <!-- Кнопки -->
+                    <div class="hero-buttons d-flex gap-4 justify-content-center flex-wrap">
+                        <a href="{{ route('services') }}" class="btn btn-primary btn-lg px-5 py-3 fw-semibold">
+                            {{ __('home.programs_title') }}
+                        </a>
+                        <a href="{{ route('application-form') }}" class="btn btn-outline-primary btn-lg px-5 py-3 fw-semibold">
                             {{ __('home.apply_button') }}
                         </a>
-                        <a href="{{ route('services') }}" class="btn btn-outline-light btn-lg px-5 py-3 fw-semibold text-white border-white">
-                            {{ __('home.services_title') }}
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-6 text-center">
-                    <div class="hero-image-wrapper">
-                        <img src="{{ asset('frontend/img/university-building.png') }}" 
-                             alt="Әл-Фараби атындағы ҚазҰУ - Біліктілікті арттыру институты" 
-                             class="img-fluid hero-image">
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="hero-shape">
-            <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg">
-                <path fill="#ffffff" fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
-            </svg>
         </div>
     </section>
 
@@ -443,11 +435,76 @@
 }
 
 .hero-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: white;
+    background: white;
+    color: var(--primary-color);
     position: relative;
-    overflow: hidden;
     padding: 80px 0;
+    text-align: center;
+}
+
+.min-vh-75 {
+    min-height: 75vh;
+}
+
+/* Стили для логотипов */
+.hero-logos {
+    margin-bottom: 3rem;
+}
+
+.hero-logo {
+    max-height: 100px;
+    width: auto;
+    transition: all 0.3s ease;
+}
+
+.hero-logo:hover {
+    transform: scale(1.05);
+}
+
+.farabi-logo {
+    max-height: 110px;
+}
+
+.ipk-logo {
+    max-height: 90px;
+}
+
+/* Заголовок */
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+/* Описание */
+.hero-description {
+    font-size: 1.1rem;
+    color: #555;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+}
+
+/* Кнопки */
+.hero-buttons {
+    gap: 1.5rem;
+}
+
+.hero-buttons .btn {
+    min-width: 200px;
+    transition: all 0.3s ease;
+}
+
+.hero-buttons .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(31, 58, 138, 0.3);
+}
+
+.hero-section .container {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-bg {
@@ -457,42 +514,6 @@
     right: 0;
     bottom: 0;
     z-index: 1;
-}
-
-.hero-section .container {
-    position: relative;
-    z-index: 2;
-}
-
-.min-vh-75 {
-    min-height: 75vh;
-}
-
-/* Стили для логотипов */
-.hero-logos {
-    margin-bottom: 2rem;
-}
-
-.hero-logo {
-    max-height: 80px;
-    width: auto;
-    transition: all 0.3s ease;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 10px;
-}
-
-.hero-logo:hover {
-    transform: scale(1.05);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.farabi-logo {
-    max-height: 90px;
-}
-
-.ipk-logo {
-    max-height: 70px;
 }
 
 /* Улучшенная видимость текста */
@@ -706,40 +727,43 @@
 }
 
 @media (max-width: 768px) {
-    .hero-section .row {
-        text-align: center;
-    }
-    
     .hero-section {
         padding: 60px 0;
     }
     
-    .min-vh-75 {
-        min-height: 60vh;
+    .hero-title {
+        font-size: 2rem;
     }
     
-    .hero-section h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero-section .lead {
-        font-size: 1.1rem;
+    .hero-description {
+        font-size: 1rem;
+        padding: 0 20px;
     }
     
     .hero-logos {
-        justify-content: center;
+        margin-bottom: 2rem;
     }
     
     .hero-logo {
-        max-height: 60px;
+        max-height: 80px;
     }
     
     .farabi-logo {
-        max-height: 70px;
+        max-height: 90px;
     }
     
     .ipk-logo {
-        max-height: 55px;
+        max-height: 70px;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .hero-buttons .btn {
+        min-width: 250px;
+        margin-bottom: 1rem;
     }
 }
 
@@ -748,33 +772,35 @@
         padding: 40px 0;
     }
     
-    .hero-section h1 {
-        font-size: 2rem;
+    .hero-title {
+        font-size: 1.8rem;
+        padding: 0 15px;
     }
     
-    .hero-section .lead {
-        font-size: 1rem;
-    }
-    
-    .min-vh-75 {
-        min-height: 50vh;
+    .hero-description {
+        font-size: 0.95rem;
+        padding: 0 15px;
     }
     
     .hero-logos {
         flex-direction: column;
-        gap: 1rem !important;
+        gap: 1.5rem !important;
     }
     
     .hero-logo {
-        max-height: 50px;
+        max-height: 70px;
     }
     
     .farabi-logo {
-        max-height: 60px;
+        max-height: 80px;
     }
     
     .ipk-logo {
-        max-height: 45px;
+        max-height: 60px;
+    }
+    
+    .hero-buttons .btn {
+        min-width: 280px;
     }
 }
 </style>

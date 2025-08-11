@@ -29,7 +29,7 @@
 }
 
 .btn-check:checked + label {
-    background-color: #1e40af;
+    background-color: #1E3A8A;
     padding: 5px 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -49,7 +49,7 @@
 
 #basic-addon1 {
     padding: 11px;
-    background: #1e40af;
+    background: #1E3A8A;
     cursor: pointer;
 }
 
@@ -242,8 +242,8 @@ div.switcher label input + span small {
 }
 
 div.switcher label input:checked + span {
-    background: #1e40af;
-    border-color: #1e40af;
+    background: #1E3A8A;
+    border-color: #1E3A8A;
 }
 
 div.switcher label input:checked + span small {
@@ -267,7 +267,7 @@ div.switcher label input:checked + span small {
 
 .select2-container--default
     .select2-results__option--highlighted.select2-results__option--selectable {
-    background-color: #1e40af !important;
+    background-color: #1E3A8A !important;
     color: white;
 }
 
@@ -322,7 +322,7 @@ div.switcher label input:checked + span small {
     justify-content: center;
     width: 40px;
     height: 40px;
-    background-color: #1e40af;
+    background-color: #1E3A8A;
     border-radius: 50%;
 }
 
@@ -369,7 +369,7 @@ div.switcher label input:checked + span small {
 
 .item-action a:hover,
 b.text-highlight {
-    color: #1e40af;
+    color: #1E3A8A;
 }
 
 .item-action a i {
@@ -556,7 +556,7 @@ b.text-highlight {
 }
 
 .basic-button {
-    background: #1e40af;
+    background: #1E3A8A;
     padding: 5px 15px 5px 15px;
     color: white;
     border-radius: 10px;
@@ -1711,14 +1711,14 @@ body {
     display: inline-block !important;
     width: auto;
     margin: 0;
-    background: #1e40af1c;
+    background: #1E3A8A1c;
     padding: 4px 10px 5px 10px;
     color: var(--tg-theme-primary);
     border-radius: 3px;
 }
 
 .course-language-list span {
-    background: #1e40af1c;
+    background: #1E3A8A1c;
     padding: 4px 10px 5px 10px;
     color: var(--tg-theme-primary) !important;
     border-radius: 3px;
@@ -2092,7 +2092,7 @@ li.level-wrapper b {
 }
 
 .dashboard__counter-item .content .count {
-    color: #1e40af;
+    color: #1E3A8A;
 }
 
 .invoice hr {
