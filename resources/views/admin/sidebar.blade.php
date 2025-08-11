@@ -120,7 +120,7 @@
             @endif --}}
 
 
-            {{-- @if(checkAdminHasPermission('menu.view') || checkAdminHasPermission('page.management') || checkAdminHasPermission('social.link.management') || checkAdminHasPermission('faq.view'))
+             @if(checkAdminHasPermission('menu.view') || checkAdminHasPermission('page.management') || checkAdminHasPermission('social.link.management') || checkAdminHasPermission('faq.view'))
                 <li class="menu-header">{{ __('Manage Website') }}</li>
 
                 @if (Module::isEnabled('MenuBuilder') && checkAdminHasPermission('menu.view'))
@@ -138,7 +138,7 @@
                 @if (Module::isEnabled('Faq') && checkAdminHasPermission('faq.view'))
                     @include('faq::sidebar')
                 @endif
-            @endif --}}
+            @endif 
 
             {{-- @if(checkAdminHasPermission('setting.view') || checkAdminHasPermission('basic.payment.view') || checkAdminHasPermission('payment.view') || checkAdminHasPermission('currency.view') || checkAdminHasPermission('role.view') || checkAdminHasPermission('admin.view') || checkAdminHasPermission('addon.view'))
                 <li class="menu-header">{{ __('Settings') }}</li>

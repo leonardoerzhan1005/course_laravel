@@ -121,7 +121,8 @@
                 <a class="nav-link" href="{{ route('contact.index') }}">{{ __('services.contact') }}</a>
                 
                 <!-- Динамическое меню из базы данных (если есть) -->
-                @if ($nav_menu)
+                {{-- 
+                  @if ($nav_menu)
                     @foreach ($nav_menu->menuItems as $menu)
                         @if ($menu?->link == '/' && $setting?->show_all_homepage == 1)
                             <!-- Пропускаем главную страницу, так как она уже добавлена выше -->
@@ -142,7 +143,7 @@
                             @endif
                         @endif
                     @endforeach
-                @endif
+                @endif --}}
             </div>
 
             <!-- Right Side Actions -->
