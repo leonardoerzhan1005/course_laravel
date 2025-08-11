@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
-@section('meta_title', $seo_setting['about_page']['seo_title'])
-@section('meta_description', $seo_setting['about_page']['seo_description'])
+@section('meta_title', $seo_setting['about_page']['seo_title'] ?? '')
+@section('meta_description', $seo_setting['about_page']['seo_description'] ?? '')
 
 @section('contents')
     <!-- breadcrumb-area -->
@@ -43,11 +43,11 @@
                         <div class="section__title">
                             <span class="sub-title">{{ __('Get More About Us') }}</span>
                             <h2 class="title">
-                                {!! clean(processText($aboutSection?->content?->title)) !!}
+                                {!! safeCleanProcessText($aboutSection?->content?->title) !!}
                             </h2>
                         </div>
 
-                        {!! clean(processText($aboutSection?->content?->description)) !!}
+                        {!! safeCleanProcessText($aboutSection?->content?->description) !!}
                         @if ($aboutSection?->global_content?->button_url != null)
                             <div class="tg-button-wrap">
                                 <a href="{{ $aboutSection?->global_content?->button_url }}"
@@ -107,9 +107,9 @@
                     <div class="faq__content">
                         <div class="section__title pb-10">
                             <span class="sub-title">{{ $faqSection?->content?->short_title }}</span>
-                            <h2 class="title">{!! clean(processText($faqSection?->content?->title)) !!}</h2>
+                            <h2 class="title">{!! safeCleanProcessText($faqSection?->content?->title) !!}</h2>
                         </div>
-                        <p>{!! clean(processText($faqSection?->content?->description)) !!}</p>
+                        <p>{!! safeCleanProcessText($faqSection?->content?->description) !!}</p>
                         <div class="faq__wrap">
                             <div class="accordion" id="accordionExample">
                                 @foreach ($faqs as $faq)

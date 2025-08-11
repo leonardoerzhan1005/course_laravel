@@ -4,8 +4,8 @@
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <div class="section__title text-center white-title mb-60">
-                    <h2 class="title">{!! clean(processText($ourFeatures?->content?->sec_title)) !!}</h2>
-                    <p>{!! clean(processText($ourFeatures?->content?->sec_description)) !!}</p>
+                    <h2 class="title">{!! safeCleanProcessText($ourFeatures?->content?->sec_title) !!}</h2>
+                    <p>{!! safeCleanProcessText($ourFeatures?->content?->sec_description) !!}</p>
                 </div>
             </div>
         </div>

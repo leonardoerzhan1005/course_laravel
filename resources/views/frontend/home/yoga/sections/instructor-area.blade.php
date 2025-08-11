@@ -4,8 +4,8 @@
             <div class="col-xl-6 col-lg-8">
                 <div class="section__title text-center mb-45">
                     <span class="sub-title">{{ __('Our Instructors') }}</span>
-                    <h2 class="title">{!! clean(processText($featuredInstructorSection?->translation?->title)) !!}</h2>
-                    <p>{!! clean(processText($featuredInstructorSection?->translation?->sub_title)) !!}</p>
+                    <h2 class="title">{!! safeCleanProcessText($featuredInstructorSection?->translation?->title) !!}</h2>
+                    <p>{!! safeCleanProcessText($featuredInstructorSection?->translation?->sub_title) !!}</p>
                 </div>
             </div>
         </div>

@@ -25,9 +25,9 @@
                 <div class="about__content-five wsus_content-box">
                     <div class="section__title mb-15">
                         <span class="sub-title">{{ $aboutSection?->content?->short_title }}</span>
-                        <h2 class="title bold">{!! clean(processText($aboutSection?->content?->title)) !!}</h2>
+                        <h2 class="title bold">{!! safeCleanProcessText($aboutSection?->content?->title) !!}</h2>
                     </div>
-                    {!! clean(processText($aboutSection?->content?->description)) !!}
+                    {!! safeCleanProcessText($aboutSection?->content?->description) !!}
                     <div class="about__content-bottom">
                         @if ($aboutSection?->content?->button_text)
                             <a href="{{ $aboutSection?->global_content?->button_url ?? route('about-us') }}"

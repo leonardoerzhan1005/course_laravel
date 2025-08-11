@@ -131,7 +131,7 @@
                     }
                 },
                 "content": {
-                    "href": "{{ url($setting->link) }}",
+                    "href": "{{ safeUrl($setting->link, '#') }}",
                     "message": "{{ $setting->message }}",
                     "link": "{{ $setting->link_text }}",
                     "button": "{{ $setting->btn_text }}"

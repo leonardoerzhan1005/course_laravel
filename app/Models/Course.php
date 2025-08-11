@@ -12,9 +12,35 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Course extends Model {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'specialization_id',
+        'category_id',
+        'instructor_id',
+        'title',
+        'slug',
+        'description',
+        'price',
+        'status',
+        'is_approved',
+        'start_date',
+        'duration',
+        'timezone',
+        'thumbnail',
+        'demo_video_storage',
+        'demo_video_source',
+        'capacity',
+        'discount',
+        'certificate',
+        'downloadable',
+        'partner_instructor',
+        'qna',
+        'message_for_reviewer',
+    ];
 
     public function scopeActive() {
         return $this->where(['is_approved' => 'approved', 'status' => 'active']);
@@ -48,6 +74,14 @@ class Course extends Model {
 
     public function category(): BelongsTo {
         return $this->belongsTo(CourseCategory::class, 'category_id', 'id')->withDefault();
+    }
+
+    public function specialization(): BelongsTo {
+        return $this->belongsTo(Specialization::class, 'specialization_id', 'id')->withDefault();
+    }
+
+    public function getFacultyAttribute() {
+        return $this->specialization->faculty ?? null;
     }
 
     public function instructor(): BelongsTo {

@@ -74,7 +74,7 @@ class HomePageController extends Controller {
         $featuredCourse = FeaturedCourseSection::first();
 
         $featuredInstructorSection = FeaturedInstructor::first();
-        $instructorIds = json_decode($featuredInstructorSection->instructor_ids ?? '[]');
+        $instructorIds = $featuredInstructorSection ? json_decode($featuredInstructorSection->instructor_ids ?? '[]') : [];
 
         $selectedInstructors = User::whereIn('id', $instructorIds)
             ->with(['courses' => function ($query) {

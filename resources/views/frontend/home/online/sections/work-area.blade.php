@@ -24,11 +24,11 @@
                     <div class="section__title">
                         <span class="sub-title">{{ $aboutSection?->content?->short_title }}</span>
                         <h2 class="title">
-                           {!! clean(processText($aboutSection?->content?->title)) !!} 
+                           {!! safeCleanProcessText($aboutSection?->content?->title) !!} 
                         </h2>
                     </div>
                     
-                    {!! clean(processText($aboutSection?->content?->description)) !!}
+                    {!! safeCleanProcessText($aboutSection?->content?->description) !!}
   
                     <div class="tg-button-wrap">
                         <a href="{{ $aboutSection?->global_content?->button_url }}" class="btn arrow-btn">{{ $aboutSection?->content?->button_text }} <img

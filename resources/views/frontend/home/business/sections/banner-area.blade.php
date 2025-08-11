@@ -8,8 +8,8 @@
                             <div class="col-xl-6 col-lg-7">
                                 <div class="slider__content">
                                     <span class="sub-title">{{ $slider?->content?->short_title_one }}</span>
-                                    <h2 class="title">{!! clean(processText($slider?->content?->title_one)) !!}</h2>
-                                    <p>{!! clean(processText($slider?->content?->sub_title_one)) !!}</p>
+                                    <h2 class="title">{!! safeCleanProcessText($slider?->content?->title_one) !!}</h2>
+                                    <p>{!! safeCleanProcessText($slider?->content?->sub_title_one) !!}</p>
                                     <div class="slider__search">
                                         <form action="{{ route('courses') }}" class="slider__search-form">
                                             <input type="text" name="search"
@@ -30,8 +30,8 @@
                             <div class="col-xl-6 col-lg-7">
                                 <div class="slider__content">
                                     <span class="sub-title">{{ $slider?->content?->short_title_two }}</span>
-                                    <h2 class="title">{!! clean(processText($slider?->content?->title_two)) !!}</h2>
-                                    <p>{!! clean(processText($slider?->content?->sub_title_two)) !!}</p>
+                                    <h2 class="title">{!! safeCleanProcessText($slider?->content?->title_two) !!}</h2>
+                                    <p>{!! safeCleanProcessText($slider?->content?->sub_title_two) !!}</p>
                                     <div class="slider__search">
                                         <form action="{{ route('courses') }}" class="slider__search-form">
                                             <input type="text" name="search"
@@ -52,8 +52,8 @@
                             <div class="col-xl-6 col-lg-7">
                                 <div class="slider__content">
                                     <span class="sub-title">{{ $slider?->content?->short_title_three }}</span>
-                                    <h2 class="title">{!! clean(processText($slider?->content?->title_three)) !!}</h2>
-                                    <p>{!! clean(processText($slider?->content?->sub_title_three)) !!}</p>
+                                    <h2 class="title">{!! safeCleanProcessText($slider?->content?->title_three) !!}</h2>
+                                    <p>{!! safeCleanProcessText($slider?->content?->sub_title_three) !!}</p>
                                     <div class="slider__search">
                                         <form action="{{ route('courses') }}" class="slider__search-form">
                                             <input type="text" name="search"

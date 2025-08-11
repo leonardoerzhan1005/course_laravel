@@ -32,6 +32,10 @@ enum DefaultMenusEnum: string {
                 'name' => __('All Instructors'),
                 'url' => '/all-instructors',
             ],
+            (object) [
+                'name' => __('Application Form'),
+                'url' => '/application-form',
+            ],
         ];
         if (Module::has('CourseBundle') && Module::isEnabled('CourseBundle')){
             $all_default_menus[] = (object) [

@@ -1,13 +1,13 @@
-@if(count($subCategories) > 0)
+@if(count($specializations) > 0)
 <div class="courses-widget mb-4 pb-1">
-    <h4 class="widget-title">{{ __('Sub Categories') }}</h4>
+    <h4 class="widget-title">{{ __('Специализации') }}</h4>
 <div class="courses-cat-list">
     <ul class="list-wrap">
-        @foreach ($subCategories->sortBy('translation.name') as $category)
+        @foreach ($specializations->sortBy('sort_order') as $specialization)
         <li>
             <div class="form-check">
-                <input @checked(in_array($category->id, $categoriesIds)) class="form-check-input category-checkbox" type="checkbox" value="{{ $category->id }}" id="cat_{{ $category->id }}">
-                <label class="form-check-label" for="cat_{{ $category->id }}">{{ $category->translation->name }}</label>
+                <input @checked(in_array($specialization->id, $selectedSpecializations)) class="form-check-input category-checkbox" type="checkbox" value="{{ $specialization->id }}" id="spec_{{ $specialization->id }}">
+                <label class="form-check-label" for="spec_{{ $specialization->id }}">{{ $specialization->name_ru }}</label>
             </div>
         </li>
         @endforeach

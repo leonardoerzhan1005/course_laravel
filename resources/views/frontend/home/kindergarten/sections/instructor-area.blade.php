@@ -4,7 +4,7 @@
             <div class="col-xl-5 col-lg-7">
                 <div class="section__title text-center mb-50">
                     <span class="sub-title">{{ __('Our Teacher') }}</span>
-                    <h2 class="title">{!! clean(processText($featuredInstructorSection?->translation?->title)) !!}</h2>
+                    <h2 class="title">{!! safeCleanProcessText($featuredInstructorSection?->translation?->title) !!}</h2>
                 </div>
             </div>
         </div>

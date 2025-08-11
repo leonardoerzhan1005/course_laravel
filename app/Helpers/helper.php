@@ -95,6 +95,17 @@ if (!function_exists('getSessionCurrency')) {
     function getSessionCurrency(): string {
         if (!session()->has('currency_code') || !session()->has('currency_rate') || !session()->has('currency_position')) {
             $currency = allCurrencies()->where('is_default', 'yes')->first();
+            
+            // Fallback to first available currency if no default found
+            if (!$currency) {
+                $currency = allCurrencies()->first();
+            }
+            
+            // If still no currency found, return USD as fallback
+            if (!$currency) {
+                return 'USD';
+            }
+            
             session()->put('currency_code', $currency->currency_code);
             session()->forget('currency_position');
             session()->put('currency_position', $currency->currency_position);
@@ -156,6 +167,16 @@ if (!function_exists('currencyWithoutIcon')) {
         // Fallback to default currency if not found
         if (!$currency) {
             $currency = allCurrencies()->where('is_default', 'yes')->first();
+        }
+        
+        // Fallback to first available currency if still no default found
+        if (!$currency) {
+            $currency = allCurrencies()->first();
+        }
+        
+        // If no currency found at all, return original price
+        if (!$currency) {
+            return number_format($price, 2, '.', '');
         }
 
         $convertedPrice = $price * $currency->currency_rate;
@@ -596,9 +617,12 @@ if (!function_exists('minutesToHours')) {
 if (!function_exists('setEnrollmentIdsInSession')) {
     function setEnrollmentIdsInSession() {
         if (auth('web')->check()) {
-            $enrollmentsIds = Enrollment::where('user_id', userAuth()->id)->pluck('course_id')->toArray();
-            session()->put('enrollments', $enrollmentsIds);
-            return;
+            $user = userAuth();
+            if ($user) {
+                $enrollmentsIds = Enrollment::where('user_id', $user->id)->pluck('course_id')->toArray();
+                session()->put('enrollments', $enrollmentsIds);
+                return;
+            }
         }
 
         session()->put('enrollments', []);
@@ -608,10 +632,13 @@ if (!function_exists('setEnrollmentIdsInSession')) {
 
 if (!function_exists('setInstructorCourseIdsInSession')) {
     function setInstructorCourseIdsInSession() {
-        if (auth('web')->check() && userAuth()->role == 'instructor') {
-            $enrollmentsIds = Course::where('instructor_id', userAuth()->id)->pluck('id')->toArray();
-            session()->put('instructor_courses', $enrollmentsIds);
-            return;
+        if (auth('web')->check()) {
+            $user = userAuth();
+            if ($user && $user->role == 'instructor') {
+                $enrollmentsIds = Course::where('instructor_id', $user->id)->pluck('id')->toArray();
+                session()->put('instructor_courses', $enrollmentsIds);
+                return;
+            }
         }
 
         session()->put('instructor_courses', []);
@@ -620,6 +647,52 @@ if (!function_exists('setInstructorCourseIdsInSession')) {
 
 if (!function_exists('processText')) {
     function processText($text) {
+        // Ensure we have a string to work with
+        if (!is_string($text)) {
+            // Log the issue for debugging
+            if (is_object($text)) {
+                $className = get_class($text);
+                \Log::warning('processText received object instead of string', [
+                    'type' => $className,
+                    'value' => safeInspect($text),
+                    'trace' => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5)
+                ]);
+                
+                // Special handling for problematic objects
+                if ($className === 'Illuminate\Routing\UrlGenerator' || 
+                    $className === 'Illuminate\Routing\RouteCollection' ||
+                    $className === 'Illuminate\Routing\Router') {
+                    \Log::error('Routing object detected in processText', [
+                        'type' => $className,
+                        'trace' => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 8)
+                    ]);
+                    return '';
+                }
+                
+                // Try to convert to string safely
+                try {
+                    $text = (string) $text;
+                } catch (\Exception $e) {
+                    \Log::error('Failed to convert object to string in processText', [
+                        'type' => $className,
+                        'error' => $e->getMessage()
+                    ]);
+                    return '';
+                }
+            } else {
+                // For non-object, non-string types
+                try {
+                    $text = (string) $text;
+                } catch (\Exception $e) {
+                    \Log::error('Failed to convert non-string type to string in processText', [
+                        'type' => gettype($text),
+                        'error' => $e->getMessage()
+                    ]);
+                    return '';
+                }
+            }
+        }
+        
         // Replace text within square brackets with a <span> tag
         $patternSquareBrackets = '/\[(.*?)\]/';
         $replacementSquareBrackets = '<span class="highlight">$1</span>';
@@ -639,6 +712,123 @@ if (!function_exists('processText')) {
         return $text;
     }
 }
+
+if (!function_exists('safeCleanProcessText')) {
+    function safeCleanProcessText($text, $default = '') {
+        // If the text is null, return default
+        if ($text === null) {
+            return $default;
+        }
+        
+        // Ensure we have a string to work with
+        if (!is_string($text)) {
+            // Log the issue for debugging
+            if (is_object($text)) {
+                $className = get_class($text);
+                \Log::warning('safeCleanProcessText received object instead of string', [
+                    'type' => $className,
+                    'value' => safeInspect($text),
+                    'trace' => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5)
+                ]);
+                
+                // Special handling for UrlGenerator objects and other problematic objects
+                if ($className === 'Illuminate\Routing\UrlGenerator' || 
+                    $className === 'Illuminate\Routing\RouteCollection' ||
+                    $className === 'Illuminate\Routing\Router') {
+                    \Log::error('Routing object detected in safeCleanProcessText', [
+                        'type' => $className,
+                        'trace' => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 8)
+                    ]);
+                    return $default;
+                }
+                
+                // Try to convert to string safely, but fallback to default if it fails
+                try {
+                    $text = (string) $text;
+                } catch (\Exception $e) {
+                    \Log::error('Failed to convert object to string in safeCleanProcessText', [
+                        'type' => $className,
+                        'error' => $e->getMessage(),
+                        'trace' => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3)
+                    ]);
+                    return $default;
+                }
+            } else {
+                // For non-object, non-string types (like arrays, numbers, etc.)
+                try {
+                    $text = (string) $text;
+                } catch (\Exception $e) {
+                    \Log::error('Failed to convert non-string type to string in safeCleanProcessText', [
+                        'type' => gettype($text),
+                        'error' => $e->getMessage()
+                    ]);
+                    return $default;
+                }
+            }
+        }
+        
+        // Process the text safely
+        $processedText = processText($text);
+        
+        // Ensure processedText is a string before calling clean()
+        if (!is_string($processedText)) {
+            \Log::error('processText returned non-string in safeCleanProcessText', [
+                'text' => $text,
+                'processed_text' => $processedText,
+                'type' => gettype($processedText)
+            ]);
+            
+            // Try to convert to string if it's an object
+            if (is_object($processedText)) {
+                try {
+                    $processedText = (string) $processedText;
+                } catch (\Exception $e) {
+                    \Log::error('Failed to convert processedText object to string', [
+                        'error' => $e->getMessage()
+                    ]);
+                    return $default;
+                }
+            } else {
+                // For non-object, non-string types
+                try {
+                    $processedText = (string) $processedText;
+                } catch (\Exception $e) {
+                    \Log::error('Failed to convert processedText to string', [
+                        'error' => $e->getMessage()
+                    ]);
+                    return $default;
+                }
+            }
+            
+            // Double-check that we now have a string
+            if (!is_string($processedText)) {
+                return $default;
+            }
+        }
+        
+        // Clean the processed text safely
+        try {
+            // Double-check that processedText is still a string before calling clean()
+            if (!is_string($processedText)) {
+                \Log::error('processedText is not a string before calling clean()', [
+                    'type' => gettype($processedText),
+                    'value' => $processedText
+                ]);
+                return $default;
+            }
+            
+            return clean($processedText);
+        } catch (\Exception $e) {
+            \Log::error('Error in clean() function', [
+                'text' => $text,
+                'processed_text' => $processedText,
+                'error' => $e->getMessage()
+            ]);
+            return $processedText; // Return processed text without cleaning if clean fails
+        }
+    }
+}
+
 function calculateReadingTime($content) {
     // Average reading speed (words per minute)
     $readingSpeed = 200;
@@ -966,5 +1156,204 @@ if (!function_exists('hasCourseInPurchased')) {
 if (!function_exists('hasCourseInCart')) {
     function hasCourseInCart($user, $course) {
         return $user->carts()->where('course_id', $course->id)->exists();
+    }
+}
+
+if (!function_exists('safeUrl')) {
+    function safeUrl($url, $default = '#') {
+        // If the URL is null, return default
+        if ($url === null) {
+            return $default;
+        }
+        
+        // If it's already a string, validate it
+        if (is_string($url)) {
+            // If it's a valid URL or relative path, return it
+            if (filter_var($url, FILTER_VALIDATE_URL) || str_starts_with($url, '/') || str_starts_with($url, '#')) {
+                return $url;
+            }
+            // If it's just a string that might be a path, try to make it safe
+            return $url;
+        }
+        
+        // If it's an object, handle it safely
+        if (is_object($url)) {
+            $className = get_class($url);
+            
+            // Special handling for UrlGenerator objects
+            if ($className === 'Illuminate\Routing\UrlGenerator' || 
+                $className === 'Illuminate\Routing\RouteCollection' ||
+                $className === 'Illuminate\Routing\Router') {
+                \Log::error('Routing object detected in safeUrl', [
+                    'type' => $className,
+                    'trace' => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 3)
+                ]);
+                return $default;
+            }
+            
+            // Try to convert to string safely
+            try {
+                $urlString = (string) $url;
+                if (!empty($urlString)) {
+                    return $urlString;
+                }
+            } catch (\Exception $e) {
+                \Log::error('Failed to convert object to string in safeUrl', [
+                    'type' => $className,
+                    'error' => $e->getMessage()
+                ]);
+            }
+        }
+        
+        // For any other type, try to convert to string
+        try {
+            $urlString = (string) $url;
+            if (!empty($urlString)) {
+                return $urlString;
+            }
+        } catch (\Exception $e) {
+            \Log::error('Failed to convert to string in safeUrl', [
+                'type' => gettype($url),
+                'error' => $e->getMessage()
+            ]);
+        }
+        
+        return $default;
+    }
+}
+
+if (!function_exists('safeUrlForTemplate')) {
+    function safeUrlForTemplate($url, $default = '#') {
+        // If the URL is null, return default
+        if ($url === null) {
+            return $default;
+        }
+        
+        // If it's already a string, validate it
+        if (is_string($url)) {
+            // If it's a valid URL or relative path, return it
+            if (filter_var($url, FILTER_VALIDATE_URL) || str_starts_with($url, '/') || str_starts_with($url, '#')) {
+                return $url;
+            }
+            // If it's just a string that might be a path, try to make it safe
+            return $url;
+        }
+        
+        // If it's an object, handle it safely
+        if (is_object($url)) {
+            $className = get_class($url);
+            
+            // Special handling for UrlGenerator objects
+            if ($className === 'Illuminate\Routing\UrlGenerator' || 
+                $className === 'Illuminate\Routing\RouteCollection' ||
+                $className === 'Illuminate\Routing\Router') {
+                \Log::error('Routing object detected in safeUrlForTemplate', [
+                    'type' => $className,
+                    'trace' => debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 5)
+                ]);
+                return $default;
+            }
+            
+            // Try to convert to string safely
+            try {
+                $urlString = (string) $url;
+                if (!empty($urlString)) {
+                    return $urlString;
+                }
+            } catch (\Exception $e) {
+                \Log::error('Failed to convert object to string in safeUrlForTemplate', [
+                    'type' => $className,
+                    'error' => $e->getMessage()
+                ]);
+            }
+        }
+        
+        // For any other type, try to convert to string
+        try {
+            $urlString = (string) $url;
+            if (!empty($urlString)) {
+                return $urlString;
+            }
+        } catch (\Exception $e) {
+            \Log::error('Failed to convert to string in safeUrlForTemplate', [
+                'type' => gettype($url),
+                'error' => $e->getMessage()
+            ]);
+        }
+        
+        return $default;
+    }
+}
+
+if (!function_exists('safeInspect')) {
+    function safeInspect($value, $maxDepth = 3) {
+        if (is_null($value)) {
+            return 'NULL';
+        }
+        
+        if (is_string($value)) {
+            return 'string(' . strlen($value) . ') "' . substr($value, 0, 100) . '"';
+        }
+        
+        if (is_numeric($value)) {
+            return gettype($value) . '(' . $value . ')';
+        }
+        
+        if (is_bool($value)) {
+            return 'bool(' . ($value ? 'true' : 'false') . ')';
+        }
+        
+        if (is_array($value)) {
+            if (empty($value)) {
+                return 'array(0)';
+            }
+            $result = 'array(' . count($value) . ') {';
+            $count = 0;
+            foreach ($value as $key => $val) {
+                if ($count >= 5) {
+                    $result .= ' ...';
+                    break;
+                }
+                $result .= "\n  [" . safeInspect($key, $maxDepth - 1) . "] => " . safeInspect($val, $maxDepth - 1);
+                $count++;
+            }
+            $result .= "\n}";
+            return $result;
+        }
+        
+        if (is_object($value)) {
+            $className = get_class($value);
+            
+            // Special handling for common Laravel objects
+            if ($className === 'Illuminate\Routing\UrlGenerator') {
+                return 'UrlGenerator object';
+            }
+            
+            if ($className === 'Illuminate\Routing\RouteCollection') {
+                return 'RouteCollection object';
+            }
+            
+            if ($className === 'Illuminate\Routing\Router') {
+                return 'Router object';
+            }
+            
+            // For other objects, try to get some basic info
+            try {
+                if (method_exists($value, '__toString')) {
+                    return $className . ' object: "' . (string) $value . '"';
+                }
+                
+                if (method_exists($value, 'toArray')) {
+                    $array = $value->toArray();
+                    return $className . ' object: ' . safeInspect($array, $maxDepth - 1);
+                }
+                
+                return $className . ' object';
+            } catch (\Exception $e) {
+                return $className . ' object (error: ' . $e->getMessage() . ')';
+            }
+        }
+        
+        return gettype($value);
     }
 }

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.master')
-@section('meta_title', $seo_setting['course_page']['seo_title'])
-@section('meta_description', $seo_setting['course_page']['seo_description'])
+@section('meta_title', $seo_setting['course_page']['seo_title'] ?? '')
+@section('meta_description', $seo_setting['course_page']['seo_description'] ?? '')
 
 @section('contents')
     <!-- breadcrumb-area -->
@@ -21,17 +21,17 @@
                         </div>
                         <aside class="courses__sidebar">
                             <div class="courses-widget">
-                                <h4 class="widget-title">{{ __('Categories') }}</h4>
+                                <h4 class="widget-title">{{ __('Факультеты') }}</h4>
                                 <div class="courses-cat-list">
                                     <ul class="list-wrap">
-                                        @foreach ($categories->sortBy('translation.name') as $category)
+                                        @foreach ($faculties as $faculty)
                                             <li>
                                                 <div class="form-check">
                                                     <input class="form-check-input main-category-checkbox" type="radio"
-                                                        name="main_category" value="{{ $category->slug }}"
-                                                        id="cat_{{ $category->id }}">
+                                                        name="main_category" value="{{ $faculty->id }}"
+                                                        id="faculty_{{ $faculty->id }}">
                                                     <label class="form-check-label"
-                                                        for="cat_{{ $category->id }}">{{ $category->translation->name }}</label>
+                                                        for="faculty_{{ $faculty->id }}">{{ $faculty->name_ru }}</label>
                                                 </div>
                                             </li>
                                         @endforeach

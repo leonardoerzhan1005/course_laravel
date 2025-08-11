@@ -2,11 +2,12 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use App\Models\UserEducation;
-use App\Models\UserExperience;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Faker\Factory as Faker;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -15,238 +16,82 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $companies = ["Google", 'Facebook', 'Apple', 'Microsoft'];
-        $educations = ["Complied Bachelor from Oxford University", 'Complied Master from UA University', 'Complied Phd from Nevada University', 'Complied Master from Stanford University'];
-        // force truncate 
-        \DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        \DB::table('users')->truncate();
-        \DB::table('user_education')->truncate();
-        \DB::table('user_experiences')->truncate();
-        \DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        // Очищаем таблицу перед заполнением (кроме админа)
+        DB::table('users')->where('email', '!=', 'admin@gmail.com')->delete();
 
-        User::create([
-            'id' => 1000,
-            'name' => 'Jhon Doe',
-            'email' => 'student@gmail.com',
-            'password' => bcrypt('1234'),
-            'role' => 'student',
-            'email_verified_at' => now(),
-        ]);
+        $faker = Faker::create('ru_RU');
 
-        User::create([
-            'id' => 1001,
-            'name' => 'Jason Thorne',
-            'email' => 'instructor@gmail.com',
-            'password' => bcrypt('1234'),
-            'role' => 'instructor',
-            'email_verified_at' => now(),
-            'short_bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices',
-            'bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-            ',
-            'job_title' => 'Developer',
-            'facebook' => 'https://www.facebook.com/',
-            'twitter' => 'https://twitter.com/',
-            'linkedin' => 'https://www.linkedin.com/',
-            'website' => 'https://www.websolutionus.com/',
-            'github' => 'https://www.github.com/',
-        ]);
-
-        for ($i = 0; $i < 4; $i++) {
-            UserExperience::create([
-                'user_id' => 1001,
-                'company' => $companies[$i],
-                'position' => 'Developer',
-                'start_date' => now()->subYear(),
-                'end_date' => now(),
-            ]);
-            UserEducation::create([
-                'user_id' => 1001,
-                'education' => $educations[$i],
-            ]);
-        }
-
-        User::create([
-            'id' => 1002,
-            'name' => 'Mark Davenport',
-            'email' => 'instructortwo@gmail.com',
-            'password' => bcrypt('1234'),
-            'role' => 'instructor',
-            'email_verified_at' => now(),
-            'short_bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices',
-            'bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-            ',
-            'job_title' => 'Developer',
-            'facebook' => 'https://www.facebook.com/',
-            'twitter' => 'https://twitter.com/',
-            'linkedin' => 'https://www.linkedin.com/',
-            'website' => 'https://www.websolutionus.com/',
-            'github' => 'https://www.github.com/',
-        ]);
-
-        for ($i = 0; $i < 4; $i++) {
-            UserExperience::create([
-                'user_id' => 1002,
-                'company' => $companies[$i],
-                'position' => 'Developer',
-                'start_date' => now()->subYear(),
-                'end_date' => now(),
-            ]);
-            UserEducation::create([
-                'user_id' => 1002,
-                'education' => $educations[$i],
-            ]);
-        }
-
-        User::create([
-            'id' => 1003,
-            'name' => 'Ethan Granger',
-            'email' => 'instructortrhee@gmail.com',
-            'password' => bcrypt('1234'),
-            'role' => 'instructor',
-            'email_verified_at' => now(),
-            'short_bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices',
-            'bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-            ',
-            'job_title' => 'Developer',
-            'facebook' => 'https://www.facebook.com/',
-            'twitter' => 'https://twitter.com/',
-            'linkedin' => 'https://www.linkedin.com/',
-            'website' => 'https://www.websolutionus.com/',
-            'github' => 'https://www.github.com/',
-        ]);
-
-        for ($i = 0; $i < 4; $i++) {
-            UserExperience::create([
-                'user_id' => 1003,
-                'company' => $companies[$i],
-                'position' => 'Developer',
-                'start_date' => now()->subYear(),
-                'end_date' => now(),
-            ]);
-            UserEducation::create([
-                'user_id' => 1003,
-                'education' => $educations[$i],
-            ]);
-        }
-
-        User::create([
-            'id' => 1004,
-            'name' => 'Lucas Hale',
-            'email' => 'instructorfour@gmail.com',
-            'password' => bcrypt('1234'),
-            'role' => 'instructor',
-            'email_verified_at' => now(),
-            'short_bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices',
-            'bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-            ',
-            'job_title' => 'Instructor',
-            'facebook' => 'https://www.facebook.com/',
-            'twitter' => 'https://twitter.com/',
-            'linkedin' => 'https://www.linkedin.com/',
-            'website' => 'https://www.websolutionus.com/',
-            'github' => 'https://www.github.com/',
-        ]);
-
-        for ($i = 0; $i < 4; $i++) {
-            UserExperience::create([
-                'user_id' => 1004,
-                'company' => $companies[$i],
-                'position' => 'Developer',
-                'start_date' => now()->subYear(),
-                'end_date' => now(),
-            ]);
-            UserEducation::create([
-                'user_id' => 1004,
-                'education' => $educations[$i],
-            ]);
-        }
-
-        User::create([
-            'id' => 1005,
-            'name' => 'Nathaniel Cross',
-            'email' => 'instructorfive@gmail.com',
-            'password' => bcrypt('1234'),
-            'role' => 'instructor',
-            'email_verified_at' => now(),
-            'short_bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices',
-            'bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-            ',
-            'job_title' => 'Developer',
-            'facebook' => 'https://www.facebook.com/',
-            'twitter' => 'https://twitter.com/',
-            'linkedin' => 'https://www.linkedin.com/',
-            'website' => 'https://www.websolutionus.com/',
-            'github' => 'https://www.github.com/',
-        ]);
-
-        for ($i = 0; $i < 4; $i++) {
-            UserExperience::create([
-                'user_id' => 1005,
-                'company' => $companies[$i],
-                'position' => 'Developer',
-                'start_date' => now()->subYear(),
-                'end_date' => now(),
-            ]);
-            UserEducation::create([
-                'user_id' => 1005,
-                'education' => $educations[$i],
-            ]);
-        }
-
-        User::create([
-            'id' => 1006,
-            'name' => 'Adrian Pierce',
-            'email' => 'instructorsix@gmail.com',
-            'password' => bcrypt('1234'),
-            'role' => 'instructor',
-            'email_verified_at' => now(),
-            'short_bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices',
-            'bio' => 'I am a web developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-
-            developer with a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
+        // Создаем 100 тестовых пользователей
+        for ($i = 0; $i < 100; $i++) {
+            $firstName = $faker->firstName;
+            $lastName = $faker->lastName;
+            $fullName = $lastName . ' ' . $firstName;
             
-            a vast array of knowledge in many different front end and back end languages, responsive frameworks, databases, and best code practices. My objective is simply to be the best web developer that I can be and to contribute to the technology industry all that I know and can do. I am dedicated to perfecting my craft by learning from more seasoned developers, remaining humble, and continuously making strides to learn all that I can about development.
-            ',
-            'job_title' => 'Developer',
-            'facebook' => 'https://www.facebook.com/',
-            'twitter' => 'https://twitter.com/',
-            'linkedin' => 'https://www.linkedin.com/',
-            'website' => 'https://www.websolutionus.com/',
-            'github' => 'https://www.github.com/',
-        ]);
-
-        for ($i = 0; $i < 4; $i++) {
-            UserExperience::create([
-                'user_id' => 1006,
-                'company' => $companies[$i],
-                'position' => 'Developer',
-                'start_date' => now()->subYear(),
-                'end_date' => now(),
-            ]);
-            UserEducation::create([
-                'user_id' => 1006,
-                'education' => $educations[$i],
+            DB::table('users')->insert([
+                'name' => $fullName,
+                'email' => $faker->unique()->safeEmail,
+                'email_verified_at' => $faker->optional(0.8)->dateTimeBetween('-1 year', 'now'),
+                'password' => Hash::make('password'),
+                'remember_token' => Str::random(10),
+                'phone' => $faker->phoneNumber,
+                'image' => $faker->optional(0.3)->imageUrl(200, 200, 'people'),
+                'wallet_balance' => $faker->optional(0.4)->randomFloat(2, 0, 10000),
+                'created_at' => $faker->dateTimeBetween('-2 years', 'now'),
+                'updated_at' => now(),
             ]);
         }
+
+        // Создаем несколько специальных пользователей для тестирования
+        $specialUsers = [
+            [
+                'name' => 'Иван Петров',
+                'email' => 'ivan.petrov@example.com',
+                'phone' => '+7 (999) 123-45-67',
+                'wallet_balance' => 5000.00,
+            ],
+            [
+                'name' => 'Мария Сидорова',
+                'email' => 'maria.sidorova@example.com',
+                'phone' => '+7 (999) 234-56-78',
+                'wallet_balance' => 7500.00,
+            ],
+            [
+                'name' => 'Алексей Козлов',
+                'email' => 'alexey.kozlov@example.com',
+                'phone' => '+7 (999) 345-67-89',
+                'wallet_balance' => 3000.00,
+            ],
+            [
+                'name' => 'Елена Волкова',
+                'email' => 'elena.volkova@example.com',
+                'phone' => '+7 (999) 456-78-90',
+                'wallet_balance' => 12000.00,
+            ],
+            [
+                'name' => 'Дмитрий Соколов',
+                'email' => 'dmitry.sokolov@example.com',
+                'phone' => '+7 (999) 567-89-01',
+                'wallet_balance' => 8000.00,
+            ],
+        ];
+
+        foreach ($specialUsers as $user) {
+            if (!DB::table('users')->where('email', $user['email'])->exists()) {
+                DB::table('users')->insert([
+                    'name' => $user['name'],
+                    'email' => $user['email'],
+                    'email_verified_at' => now(),
+                    'password' => Hash::make('password'),
+                    'remember_token' => Str::random(10),
+                    'phone' => $user['phone'],
+                    'image' => $faker->optional(0.5)->imageUrl(200, 200, 'people'),
+                    'wallet_balance' => $user['wallet_balance'],
+                    'created_at' => $faker->dateTimeBetween('-1 year', 'now'),
+                    'updated_at' => now(),
+                ]);
+            }
+        }
+
+        $this->command->info('Тестовые пользователи успешно созданы!');
     }
 }

@@ -26,11 +26,11 @@
                     <div class="section__title">
                         <span class="sub-title">{{ $faqSection?->content?->short_title }}</span>
                         <h2 class="title">
-                            {!! clean(processText($faqSection?->content?->title)) !!}
+                            {!! safeCleanProcessText($faqSection?->content?->title) !!}
                         </h2>
                     </div>
                     <p class="desc">
-                        {!! clean(processText($faqSection?->content?->description)) !!}
+                        {!! safeCleanProcessText($faqSection?->content?->description) !!}
                     </p>
                     <div class="faq__wrap">
                         <div class="accordion" id="accordionExample">

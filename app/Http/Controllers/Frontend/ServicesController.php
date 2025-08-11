@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 class ServicesController extends Controller
 {
     /**
-     * Display the services page
-     *
-     * @return \Illuminate\View\View
+     * Показать страницу услуг
      */
     public function index()
     {

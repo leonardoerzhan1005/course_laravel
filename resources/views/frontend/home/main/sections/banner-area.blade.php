@@ -4,15 +4,15 @@
             <div class="col-xl-5 col-lg-6">
                 <div class="banner__content">
                     <h3 class="title tg-svg" data-aos="fade-right" data-aos-delay="400">
-                        {!! clean(processText($hero?->content?->title)) !!}
+                        {!! safeCleanProcessText($hero?->content?->title) !!}
                     </h3>
-                    <p data-aos="fade-right" data-aos-delay="600">{!! clean(processText($hero?->content?->sub_title)) !!}</p>
+                    <p data-aos="fade-right" data-aos-delay="600">{!! safeCleanProcessText($hero?->content?->sub_title) !!}</p>
                     <div class="banner__btn-two aos-init aos-animate mt-4" data-aos="fade-right" data-aos-delay="600">
                         @if ($hero?->content?->action_button_text != null)
                         <a href="{{ $hero?->global_content?->action_button_url }}" class="btn arrow-btn">{{ $hero->content?->action_button_text }} <img src="{{ asset('frontend/img/icons/right_arrow.svg') }}" alt="img" class="injectable"></a>
                         @endif
                         @if ($hero?->content?->video_button_text != null)
-                        <a href="{{ $hero?->global_content?->video_button_url }}" class="play-btn popup-video" aria-label="{{$hero?->content?->video_button_text}}"><i class="fas fa-play"></i> {!! clean(processText($hero?->content?->video_button_text)) !!}</a>
+                        <a href="{{ $hero?->global_content?->video_button_url }}" class="play-btn popup-video" aria-label="{{$hero?->content?->video_button_text}}"><i class="fas fa-play"></i> {!! safeCleanProcessText($hero?->content?->video_button_text) !!}</a>
                         @endif
                     </div>
                 </div>

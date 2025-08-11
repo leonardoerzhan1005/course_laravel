@@ -5,9 +5,9 @@
                 <div class="faq__content">
                     <div class="section__title pb-10">
                         <span class="sub-title">{{ $faqSection?->content?->short_title }}</span>
-                        <h2 class="title">{!! clean(processText($faqSection?->content?->title)) !!}</h2>
+                        <h2 class="title">{!! safeCleanProcessText($faqSection?->content?->title) !!}</h2>
                     </div>
-                    <p>{!! clean(processText($faqSection?->content?->description)) !!}</p>
+                    <p>{!! safeCleanProcessText($faqSection?->content?->description) !!}</p>
                     <div class="faq__wrap">
                         <div class="accordion" id="accordionExample">
                             @foreach ($faqs as $faq)

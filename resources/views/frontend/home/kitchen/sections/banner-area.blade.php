@@ -4,8 +4,8 @@
         <div class="row align-items-center justify-content-center">
             <div class="col-lg-6">
                 <div class="banner__content-seven">
-                    <h2 class="title">{!! clean(processText($hero?->content?->title)) !!}</h2>
-                    <p>{!! clean(processText($hero?->content?->sub_title)) !!}</p>
+                    <h2 class="title">{!! safeCleanProcessText($hero?->content?->title) !!}</h2>
+                    <p>{!! safeCleanProcessText($hero?->content?->sub_title) !!}</p>
                     <div class="slider__search banner__search">
                         <form action="{{ route('courses') }}" class="slider__search-form">
                             <input type="text" name="search" placeholder="{{ __('Search here') }} . . .">

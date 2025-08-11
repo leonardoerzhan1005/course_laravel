@@ -96,19 +96,35 @@
 
             <!-- Navigation Menu -->
             <div class="navbar-nav me-auto">
+                <!-- 1. Басты бет (Главная страница) -->
+                <a class="nav-link" href="{{ route('home') }}">{{ __('services.home') }}</a>
+                
+                <!-- 2. Біздің қызметтер (Наши услуги) -->
+                <a class="nav-link" href="{{ route('services') }}">{{ __('services.services') }}</a>
+                
+                <!-- 3. Өтініш (Заявка) -->
+                <a class="nav-link" href="{{ route('application-form') }}">{{ __('services.application') }}</a>
+                
+                <!-- 4. Құжаттар (Документы) -->
+                <a class="nav-link" href="{{ route('documents') }}">{{ __('services.documents') }}</a>
+                
+                <!-- 5. Жаңалықтар (Новости) -->
+                <a class="nav-link" href="{{ route('blogs') }}">{{ __('services.news') }}</a>
+                
+                <!-- 6. Бағдарламалар (Программы/Курсы) -->
+                <a class="nav-link" href="{{ route('courses') }}">{{ __('services.programs') }}</a>
+                
+                <!-- 7. Сертификаттар (Сертификаты) -->
+                <a class="nav-link" href="{{ route('certificates') }}">{{ __('services.certificates') }}</a>
+                
+                <!-- 8. Байланыс (Контакты) -->
+                <a class="nav-link" href="{{ route('contact.index') }}">{{ __('services.contact') }}</a>
+                
+                <!-- Динамическое меню из базы данных (если есть) -->
                 @if ($nav_menu)
                     @foreach ($nav_menu->menuItems as $menu)
                         @if ($menu?->link == '/' && $setting?->show_all_homepage == 1)
-                            <div class="nav-item ">
-                                <a class="nav-link " href="{{ url('/') }}" role="button" >
-                                    {{ __('Home') }}
-                                </a>
-                                <!-- <ul class="dropdown-menu">
-                                    @foreach (App\Enums\ThemeList::cases() as $theme)
-                                        <li><a class="dropdown-item" href="{{ route('change-theme', $theme->value) }}">{{ __($theme->value) }}</a></li>
-                                    @endforeach
-                                </ul> -->
-                            </div>
+                            <!-- Пропускаем главную страницу, так как она уже добавлена выше -->
                         @else
                             @if ($menu->child && count($menu->child))
                                 <div class="nav-item dropdown">
@@ -117,12 +133,12 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         @foreach ($menu?->child as $child)
-                                            <li><a class="dropdown-item" href="{{ url($child?->link) }}">{{ $child?->label }}</a></li>
+                                            <li><a class="dropdown-item" href="{{ safeUrl($child?->link, '#') }}">{{ $child?->label }}</a></li>
                                         @endforeach
                                     </ul>
                                 </div>
                             @else
-                                <a class="nav-link" href="{{ url($menu?->link) }}">{{ $menu?->label }}</a>
+                                <a class="nav-link" href="{{ safeUrl($menu?->link, '#') }}">{{ $menu?->label }}</a>
                             @endif
                         @endif
                     @endforeach
@@ -228,6 +244,60 @@
                                     </select>
                                 </form>
                             </div>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Mobile Navigation Menu -->
+                <div class="d-md-none mb-3">
+                    <h6 class="text-muted">{{ __('Navigation') }}</h6>
+                    <div class="d-flex flex-column gap-2">
+                        <!-- 1. Басты бет (Главная страница) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('home') }}">{{ __('services.home') }}</a>
+                        
+                        <!-- 2. Біздің қызметтер (Наши услуги) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('services') }}">{{ __('services.services') }}</a>
+                        
+                        <!-- 3. Өтініш (Заявка) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('application-form') }}">{{ __('services.application') }}</a>
+                        
+                        <!-- 4. Құжаттар (Документы) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('documents') }}">{{ __('services.documents') }}</a>
+                        
+                        <!-- 5. Жаңалықтар (Новости) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('blogs') }}">{{ __('services.news') }}</a>
+                        
+                        <!-- 6. Бағдарламалар (Программы/Курсы) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('courses') }}">{{ __('services.programs') }}</a>
+                        
+                        <!-- 7. Сертификаттар (Сертификаты) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('certificates') }}">{{ __('services.certificates') }}</a>
+                        
+                        <!-- 8. Байланыс (Контакты) -->
+                        <a class="btn btn-outline-primary btn-sm" href="{{ route('contact.index') }}">{{ __('services.contact') }}</a>
+                        
+                        <!-- Динамическое меню из базы данных (если есть) -->
+                        @if ($nav_menu)
+                            @foreach ($nav_menu->menuItems as $menu)
+                                @if ($menu?->link == '/' && $setting?->show_all_homepage == 1)
+                                    <!-- Пропускаем главную страницу, так как она уже добавлена выше -->
+                                @else
+                                    @if ($menu->child && count($menu->child))
+                                        <div class="dropdown">
+                                            <button class="btn btn-outline-primary btn-sm dropdown-toggle w-100" type="button" data-bs-toggle="dropdown">
+                                                {{ $menu?->label }}
+                                            </button>
+                                            <ul class="dropdown-menu w-100">
+                                                @foreach ($menu?->child as $child)
+                                                    <li><a class="dropdown-item" href="{{ safeUrl($child?->link, '#') }}">{{ $child?->label }}</a></li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @else
+                                        <a class="btn btn-outline-primary btn-sm" href="{{ safeUrl($menu?->link, '#') }}">{{ $menu?->label }}</a>
+                                    @endif
+                                @endif
+                            @endforeach
                         @endif
                     </div>
                 </div>

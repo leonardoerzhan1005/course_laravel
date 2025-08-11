@@ -5,7 +5,7 @@
                 <div class="fact__inner-wrap-two">
                     <div class="section__title white-title mb-30">
                         <h2 class="title">
-                            {!! clean(processText($counter?->content?->title)) !!}
+                            {!! safeCleanProcessText($counter?->content?->title) !!}
                         </h2>
                     </div>
                     <div class="fact__item-wrap">

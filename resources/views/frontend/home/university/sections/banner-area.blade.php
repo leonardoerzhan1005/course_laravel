@@ -6,8 +6,8 @@
                 <div class="banner__content-three">
                     <span class="sub-title" data-aos="fade-right"
                         data-aos-delay="200">{{$hero?->content?->short_title}}</span>
-                    <h2 class="title" data-aos="fade-right" data-aos-delay="400">{!! clean(processText($hero?->content?->title)) !!}</h2>
-                    <p data-aos="fade-right" data-aos-delay="600">{!! clean(processText($hero?->content?->sub_title)) !!}</p>
+                    <h2 class="title" data-aos="fade-right" data-aos-delay="400">{!! safeCleanProcessText($hero?->content?->title) !!}</h2>
+                    <p data-aos="fade-right" data-aos-delay="600">{!! safeCleanProcessText($hero?->content?->sub_title) !!}</p>
                     @if ($hero?->content?->action_button_text != null)
                         <div class="banner__btn-wrap" data-aos="fade-right" data-aos-delay="800">
                             <a href="{{ $hero?->global_content?->action_button_url }}"

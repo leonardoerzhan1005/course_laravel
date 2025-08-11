@@ -1278,6 +1278,11 @@ select.form-control:not([size]):not([multiple]) {
   margin-left: 7px;
 }
 
+.card.card-bg-primary,
+.card.card-bg-danger,
+.card.card-bg-success,
+.card.card-bg-info,
+.card.card-bg-dark,
 .card.bg-primary,
 .card.bg-danger,
 .card.bg-success,
@@ -3623,7 +3628,7 @@ pre {
   position: fixed;
   top: 0;
   height: 100%;
-  width: 250px;
+  width: 280px;
   background-color: #fff;
   z-index: 880;
   left: 0;
@@ -3637,7 +3642,7 @@ pre {
 }
 
 body.sidebar-gone .main-sidebar {
-  left: -250px;
+  left: -280px;
 }
 
 body.sidebar-mini .hide-sidebar-mini {
@@ -3740,6 +3745,7 @@ body.sidebar-mini .main-sidebar .sidebar-menu>li>a .fal {
 
 body.sidebar-mini .main-sidebar .sidebar-menu>li>a span {
   display: none;
+  /* В мини-режиме span скрыт, но dropdown меню показывают полные названия */
 }
 
 body.sidebar-mini .main-sidebar .sidebar-menu>li>a .badge {
@@ -3763,11 +3769,12 @@ body.sidebar-mini .main-sidebar .sidebar-menu>li.active>a {
 body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu {
   position: absolute;
   background-color: #fff;
-  left: 65px;
+  left: 85px;
   top: 10px;
-  width: 200px;
+  width: 380px;
   display: none;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.03);
+  z-index: 1000;
 }
 
 body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li>a:focus,
@@ -3781,6 +3788,11 @@ body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li a {
   height: 40px;
   padding: 0 20px;
   background-color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 360px;
+  /* Обеспечиваем корректное отображение длинных названий */
 }
 
 body.sidebar-mini .main-sidebar .sidebar-menu>li ul.dropdown-menu li a.has-dropdown:after {
@@ -3804,17 +3816,185 @@ body.sidebar-mini .main-sidebar .sidebar-menu li:hover>ul.dropdown-menu li:hover
 }
 
 body.sidebar-mini .main-sidebar .sidebar-menu li:hover>ul.dropdown-menu li .dropdown-menu {
-  left: 200px;
+  left: 380px;
   padding: 0;
+  /* Позиционирование вложенных dropdown меню */
 }
 
 body.sidebar-mini .navbar {
-  left: 65px;
+  left: 85px;
 }
 
 body.sidebar-mini .main-content,
 body.sidebar-mini .main-footer {
-  padding-left: 90px;
+  padding-left: 120px;
+}
+
+/* Дополнительные CSS правила для лучшего отображения на мобильных устройствах */
+@media (max-width: 767.98px) {
+  .main-content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  .main-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  
+  /* Убираем sidebar на очень маленьких экранах */
+  .main-sidebar {
+    left: -280px;
+  }
+  
+  /* Показываем sidebar при необходимости */
+  body.sidebar-show .main-sidebar {
+    left: 0;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .main-content {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  .main-footer {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+  
+  /* Улучшаем отображение таблиц на мобильных */
+  .table-responsive {
+    font-size: 14px;
+  }
+  
+  .table-responsive .btn {
+    padding: 0.25rem 0.5rem;
+    font-size: 12px;
+  }
+  
+  /* Улучшаем отображение карточек на мобильных */
+  .card .card-header {
+    padding: 1rem 0.75rem;
+  }
+  
+  .card .card-body {
+    padding: 1rem 0.75rem;
+  }
+  
+  .card .card-footer {
+    padding: 0.75rem;
+  }
+  
+  /* Улучшаем отображение форм на мобильных */
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .form-control {
+    font-size: 16px; /* Предотвращает zoom на iOS */
+  }
+  
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .btn + .btn {
+    margin-left: 0;
+  }
+  
+  /* Улучшаем отображение навигации на мобильных */
+  .section .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .section .section-header .float-right {
+    margin-top: 1rem;
+    width: 100%;
+  }
+  
+  .section .section-header .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .section .section-header .btn + .btn {
+    margin-left: 0;
+  }
+  
+  /* Улучшаем отображение модальных окон на мобильных */
+  .modal-dialog {
+    margin: 0.5rem;
+    max-width: calc(100% - 1rem);
+  }
+  
+  .modal-content {
+    border-radius: 0.5rem;
+  }
+  
+  .modal-header {
+    padding: 1rem 0.75rem;
+  }
+  
+  .modal-body {
+    padding: 1rem 0.75rem;
+  }
+  
+  .modal-footer {
+    padding: 0.75rem;
+    flex-direction: column;
+  }
+  
+  .modal-footer .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .modal-footer .btn + .btn {
+    margin-left: 0;
+  }
+  
+  /* Улучшаем отображение dropdown меню на мобильных */
+  .dropdown-menu {
+    position: static !important;
+    float: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    box-shadow: none;
+    border: 1px solid #e3eaef;
+  }
+  
+  .dropdown-toggle::after {
+    display: none;
+  }
+  
+  .dropdown-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #f8f9fa;
+  }
+  
+  .dropdown-item:last-child {
+    border-bottom: none;
+  }
+  
+  /* Улучшаем отображение пагинации на мобильных */
+  .pagination {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .page-link {
+    padding: 0.5rem 0.75rem;
+    margin: 0 0.25rem;
+  }
+  
+  .page-item:first-child .page-link,
+  .page-item:last-child .page-link {
+    border-radius: 0.25rem;
+  }
 }
 
 body.layout-2 .navbar-bg {
@@ -4123,6 +4303,11 @@ body.layout-3 .main-footer {
 .main-sidebar .sidebar-menu li a span {
   margin-top: 3px;
   width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  max-width: 240px;
 }
 
 .main-sidebar .sidebar-menu li a:hover {
@@ -4177,6 +4362,10 @@ body.layout-3 .main-footer {
   padding-left: 65px;
   font-weight: 400;
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 240px;
 }
 
 .main-sidebar .sidebar-menu li ul.dropdown-menu li a:hover {
@@ -4199,7 +4388,7 @@ body.layout-3 .main-footer {
 }
 
 .main-content {
-  padding-left: 280px;
+  padding-left: 310px;
   padding-right: 30px;
   padding-top: 80px;
   width: 100%;
@@ -4207,7 +4396,7 @@ body.layout-3 .main-footer {
 }
 
 .main-footer {
-  padding: 20px 30px 20px 280px;
+  padding: 20px 30px 20px 310px;
   margin-top: 40px;
   color: #98a6ad;
   border-top: 1px solid #e3eaef;
@@ -4291,14 +4480,15 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     display: block;
   }
 
+  /* Исправляем padding для main-content, чтобы контент не врезался в sidebar */
   .main-content {
-    padding-left: 30px;
+    padding-left: 120px;
     padding-right: 30px;
     width: 100% !important;
   }
 
   .main-footer {
-    padding-left: 30px;
+    padding-left: 120px;
   }
 
   body.search-show {
@@ -4368,4 +4558,9 @@ body:not(.sidebar-mini) .sidebar-style-2 .sidebar-menu li.active ul.dropdown-men
     -webkit-transform: scale(1.2, 1.2);
     opacity: 0.0;
   }
+}
+
+body.sidebar-mini .main-content,
+body.sidebar-mini .main-footer {
+  padding-left: 120px;
 }

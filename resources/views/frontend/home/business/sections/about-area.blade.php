@@ -22,9 +22,9 @@
                 <div class="choose__content-four">
                     <div class="section__title mb-20">
                         <span class="sub-title">{{ $aboutSection?->content?->short_title }}</span>
-                        <h2 class="title bold">{!! clean(processText($aboutSection?->content?->title)) !!}</h2>
+                        <h2 class="title bold">{!! safeCleanProcessText($aboutSection?->content?->title) !!}</h2>
                     </div>
-                    {!! clean(processText($aboutSection?->content?->description)) !!}
+                    {!! safeCleanProcessText($aboutSection?->content?->description) !!}
                     <a href="{{ $aboutSection?->global_content?->button_url }}" class="btn arrow-btn btn-four">{{ $aboutSection?->content?->button_text }} <img src="{{ asset('frontend/img/icons/right_arrow.svg') }}" alt="" class="injectable"></a>
                 </div>
             </div>

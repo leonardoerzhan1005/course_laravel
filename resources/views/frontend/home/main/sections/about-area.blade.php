@@ -27,16 +27,16 @@
             <div class="col-lg-6">
                 <div class="about__content">
                     <div class="section__title">
-                        <span class="sub-title">{{ $aboutSection?->content?->short_title }}</span>
+                        <span class="sub-title">{{ $aboutSection?->content?->short_title ?? 'About Us' }}</span>
                         <h2 class="title">
-                            {!! clean(processText($aboutSection?->content?->title)) !!}
+                            {!! safeCleanProcessText($aboutSection?->content?->title ?? '', 'Welcome to Our Platform') !!}
                         </h2>
                     </div>
 
-                    {!! clean(processText($aboutSection?->content?->description)) !!}
+                    {!! safeCleanProcessText($aboutSection?->content?->description ?? '', 'We are dedicated to providing the best learning experience for our students.') !!}
 
                     <div class="tg-button-wrap">
-                        <a href="{{ url($aboutSection?->global_content?->button_url) }}" aria-label="Learn more about us"
+                        <a href="{{ safeUrl($aboutSection?->global_content?->button_url, '#') }}" aria-label="Learn more about us"
                             class="btn arrow-btn">{{ $aboutSection?->content?->button_text }} <img
                                 src="{{ asset('frontend/img/icons/right_arrow.svg') }}" alt="img"
                                 class="injectable"></a>

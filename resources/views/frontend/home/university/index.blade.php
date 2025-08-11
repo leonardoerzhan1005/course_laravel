@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
-@section('meta_title', $seo_setting['home_page']['seo_title'])
-@section('meta_description', $seo_setting['home_page']['seo_description'])
+@section('meta_title', $seo_setting['home_page']['seo_title'] ?? '')
+@section('meta_description', $seo_setting['home_page']['seo_description'] ?? '')
 @section('meta_keywords', '')
 
 @section('contents')

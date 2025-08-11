@@ -18,36 +18,41 @@ use Modules\Course\app\Models\CourseLevel;
 class CoursePageController extends Controller
 {
     function index() : View {
-        $categories = CourseCategory::active()->whereNull('parent_id')->with(['translation'])->get();
+        $faculties = \App\Models\Faculty::orderBy('sort_order')->with('specializations')->get();
         $languages = CourseLanguage::where('status', 1)->get();
         $levels = CourseLevel::where('status', 1)->with('translation')->get();
-        return view('frontend.pages.course', compact('categories', 'languages', 'levels'));
+        return view('frontend.pages.course', compact('faculties', 'languages', 'levels'));
     }
 
     function fetchCourses(Request $request) {
         $query = Course::query();
         $query->where(['is_approved' => 'approved', 'status' => 'active']);
-        $query->whereHas('category.parentCategory', function($q) use ($request) {
-            $q->where('status', 1);
-        });
-        $query->whereHas('category', function($q) use ($request) {
-            $q->where('status', 1);
-        });
+        
+        // Убираем сложную логику с parentCategory, так как у нас новая структура
+        // $query->whereHas('category.parentCategory', function($q) use ($request) {
+        //     $q->where('status', 1);
+        // });
+        // $query->whereHas('category', function($q) use ($request) {
+        //     $q->where('status', 1);
+        // });
             
         $query->when($request->search, function($q) use ($request) {
             $q->where('title', 'like', '%'.$request->search.'%');
         });
+        
+        // Фильтрация по факультету (main_category)
         $query->when($request->main_category, function($q) use ($request) {
-            $q->whereHas('category', function($q) use ($request) {
-                $q->whereHas('parentCategory', function($q) use ($request) {
-                    $q->where('slug', $request->main_category);
-                });
+            $q->whereHas('specialization.faculty', function($q) use ($request) {
+                $q->where('id', $request->main_category);
             });
         });
+        
+        // Фильтрация по специализации (category)
         $query->when($request->category && $request->filled('category'), function($q) use ($request) {
             $categoriesIds = explode(',', $request->category);
-            $q->whereIn('category_id', $categoriesIds);
+            $q->whereIn('specialization_id', $categoriesIds);
         });
+        
         $query->when($request->language && $request->filled('language'), function($q) use ($request) {
             $languagesIds = explode(',', $request->language);
             $q->whereHas('languages', function($q) use ($languagesIds) {
@@ -70,7 +75,7 @@ class CoursePageController extends Controller
             });
         });
 
-        $query->with(['instructor:id,name', 'enrollments', 'category.translation']);
+        $query->with(['instructor:id,name', 'enrollments', 'specialization.faculty']);
 
         $query->orderBy('created_at', $request->order && $request->filled('order') ? $request->order : 'desc');
         $courses = $query->paginate(9);
@@ -85,13 +90,15 @@ class CoursePageController extends Controller
             'itemCount' => $itemCount
         ];
 
-        // if main category is selected then show sub category card
+        // Если выбран факультет, показываем специализации
         if($request->main_category && $request->filled('main_category')) {
-            $subCategories = CourseCategory::whereHas('parentCategory', function($q) use ($request) {
-                $q->where('slug', $request->main_category);
-            })->with('translation')->get();
-            $categoriesIds = explode(',', $request->category);
-            $data['sidebar_items'] = view('frontend.partials.course-sidebar-item', compact('subCategories', 'categoriesIds'))->render();
+            $specializations = \App\Models\Specialization::where('faculty_id', $request->main_category)
+                ->where('is_active', true)
+                ->orderBy('sort_order')
+                ->get();
+            
+            $selectedSpecializations = $request->category ? explode(',', $request->category) : [];
+            $data['sidebar_items'] = view('frontend.partials.course-sidebar-item', compact('specializations', 'selectedSpecializations'))->render();
         }
 
         return response()->json($data);

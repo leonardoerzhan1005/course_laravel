@@ -3,7 +3,11 @@
         <div class="courses__item shine__animate-item">
             <div class="courses__item-thumb">
                 <a href="{{ route('course.show', $course->slug) }}" class="shine__animate-link">
-                    <img src="{{ asset($course->thumbnail) }}" alt="img">
+                    @if($course->thumbnail)
+                        <img src="{{ asset($course->thumbnail) }}" alt="img">
+                    @else
+                        <img src="{{ asset('frontend/images/course-placeholder.jpg') }}" alt="placeholder">
+                    @endif
                 </a>
                 <a href="javascript:;" class="wsus-wishlist-btn common-white courses__wishlist-two"
                     data-slug="{{ $course?->slug }}" aria-label="WishList">
@@ -13,16 +17,25 @@
             <div class="courses__item-content">
                 <ul class="courses__item-meta list-wrap">
                     <li class="courses__item-tag">
-                        <a
-                            href="{{ route('courses', ['category' => $course->category->id]) }}">{{ $course->category->translation->name }}</a>
+                        @if($course->specialization && $course->specialization->faculty)
+                            <a href="{{ route('courses', ['main_category' => $course->specialization->faculty->id, 'category' => $course->specialization->id]) }}">
+                                {{ $course->specialization->name_ru }}
+                            </a>
+                        @else
+                            <span>{{ __('Без специализации') }}</span>
+                        @endif
                     </li>
                     <li class="avg-rating"><i class="fas fa-star"></i>
                         {{ number_format($course->reviews()->avg('rating'), 1) ?? 0 }}</li>
                 </ul>
                 <h5 class="title"><a
                         href="{{ route('course.show', $course->slug) }}">{{ truncate($course->title, 50) }}</a></h5>
-                <p class="author">{{ __('By') }} <a
-                        href="{{ route('instructor-details', ['id' => $course->instructor->id, 'slug' => Str::slug($course->instructor->name)]) }}">{{ $course->instructor->name }}</a>
+                <p class="author">{{ __('By') }} 
+                    @if($course->instructor)
+                        <a href="{{ route('instructor-details', ['id' => $course->instructor->id, 'slug' => Str::slug($course->instructor->name)]) }}">{{ $course->instructor->name }}</a>
+                    @else
+                        <span>{{ __('Не указан') }}</span>
+                    @endif
                 </p>
                 <div class="courses__item-bottom">
                     @if (in_array($course->id, session('enrollments') ?? []))

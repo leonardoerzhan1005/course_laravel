@@ -17,10 +17,10 @@ return new class extends Migration
             $table->string('country_code');
             $table->string('currency_code');
             $table->string('currency_icon');
-            $table->string('is_default')->defualt('no');
+            $table->string('is_default')->default('no');
             $table->float('currency_rate');
             $table->string('currency_position')->default('before_price');
-            $table->string('status')->defualt('active');
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }

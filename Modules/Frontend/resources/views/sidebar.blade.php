@@ -55,13 +55,13 @@
                     {{ __('Featured Instructor') }}
                 </a>
             </li>
-            @theme([ThemeList::MAIN->value, ThemeList::ONLINE->value, ThemeList::UNIVERSITY->value,ThemeList::LANGUAGE->value])
+            <!-- @theme([ThemeList::MAIN->value, ThemeList::ONLINE->value, ThemeList::UNIVERSITY->value,ThemeList::LANGUAGE->value])
                 <li class="{{ isRoute('admin.counter-section.*', 'active') }}">
                     <a class="nav-link" href="{{ route('admin.counter-section.index', ['code' => 'en']) }}">
                         {{ __('Counter Section') }}
                     </a>
                 </li>
-            @endtheme
+            @endtheme -->
                 <li class="{{ isRoute('admin.faq-section.*', 'active') }}">
                     <a class="nav-link" href="{{ route('admin.faq-section.index', ['code' => 'en']) }}">
                         {{ __('Faq Section') }}

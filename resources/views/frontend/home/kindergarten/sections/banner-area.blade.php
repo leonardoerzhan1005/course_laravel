@@ -5,8 +5,8 @@
             <div class="col-xl-5 col-lg-5">
                 <div class="banner__content-five">
                     <span class="sub-title" data-aos="fade-right" data-aos-delay="200">{{ $hero?->content?->short_title }}</span>
-                    <h2 class="title" data-aos="fade-right" data-aos-delay="400">{!! clean(processText($hero?->content?->title)) !!}</h2>
-                    <p data-aos="fade-right" data-aos-delay="600">{!! clean(processText($hero?->content?->sub_title)) !!}</p>
+                    <h2 class="title" data-aos="fade-right" data-aos-delay="400">{!! safeCleanProcessText($hero?->content?->title) !!}</h2>
+                    <p data-aos="fade-right" data-aos-delay="600">{!! safeCleanProcessText($hero?->content?->sub_title) !!}</p>
                     <div class="banner__btn" data-aos="fade-right" data-aos-delay="800">
                         @if ($hero?->content?->action_button_text != null)
                         <a href="{{ $hero?->global_content?->action_button_url }}" class="btn arrow-btn">{{ $hero?->content?->action_button_text }} <img src="{{ asset('frontend/img/icons/right_arrow.svg') }}" alt="img" class="injectable"></a>

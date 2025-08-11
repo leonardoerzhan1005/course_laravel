@@ -102,7 +102,9 @@ Route::group(['middleware' => 'maintenance.mode'], function () {
     Route::get('application-form', [ApplicationFormController::class, 'index'])->name('application-form');
     Route::post('application-form', [ApplicationFormController::class, 'store'])->name('application-form.store');
     Route::get('get-cities/{country_id}', [ApplicationFormController::class, 'getCities'])->name('get-cities');
-    Route::get('get-specialties', [ApplicationFormController::class, 'getSpecialties'])->name('get-specialties');
+    Route::get('get-specializations-by-faculty', [ApplicationFormController::class, 'getSpecializationsByFaculty'])->name('get-specializations-by-faculty');
+    Route::get('get-courses-by-faculty', [ApplicationFormController::class, 'getCoursesByFaculty'])->name('get-courses-by-faculty');
+    Route::get('get-courses-by-specialization', [ApplicationFormController::class, 'getCoursesBySpecialization'])->name('get-courses-by-specialization');
 
     /**
      * ============================================================================

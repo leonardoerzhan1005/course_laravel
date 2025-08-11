@@ -1,8 +1,5 @@
 @php
     $footerSetting = \Modules\FooterSetting\app\Models\FooterSetting::first();
-    $footer_menu_one = menu_get_by_slug('footer-col-one');
-    $footer_menu_two = menu_get_by_slug('footer-col-two-1PiTN');
-    $footer_menu_three = menu_get_by_slug('footer-col-three');
 @endphp
 
 <footer
@@ -26,13 +23,13 @@
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                    @if(count($footer_menu_one->menuItems) > 0)
+                    @if($footer_menu_one && count($footer_menu_one->menuItems) > 0)
                     <div class="footer__widget">
                         <h4 class="footer__widget-title">{{ __('Useful Links') }}</h4>
                         <div class="footer__link">
                             <ul class="list-wrap">
                                 @foreach ($footer_menu_one->menuItems as $footerMenuOne)
-                                    <li><a href="{{ url($footerMenuOne?->link) }}">{{ $footerMenuOne?->label }}</a></li>
+                                    <li><a href="{{ safeUrl($footerMenuOne?->link, '#') }}">{{ $footerMenuOne?->label }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -40,13 +37,13 @@
                     @endif
                 </div>
                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                    @if(count($footer_menu_two->menuItems) > 0)
+                    @if($footer_menu_two && count($footer_menu_two->menuItems) > 0)
                     <div class="footer__widget">
                         <h4 class="footer__widget-title">{{ __('Our Company') }}</h4>
                         <div class="footer__link">
                             <ul class="list-wrap">
-                                @foreach ($footer_menu_two->menuItems as $footerMenuTwo)
-                                    <li><a href="{{ url($footerMenuTwo?->link) }}">{{ $footerMenuTwo?->label }}</a></li>
+                            @foreach ($footer_menu_two->menuItems as $footerMenuTwo)
+                                    <li><a href="{{ safeUrl($footerMenuTwo?->link, '#') }}">{{ $footerMenuTwo?->label }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
@@ -88,18 +85,20 @@
             <div class="row align-items-center">
                 <div class="col-md-7">
                     <div class="copy-right-text">
-                        @if(Cache::get('setting')->copyright_text)
+                        @if(Cache::get('setting')?->copyright_text)
                         <p>© {{ Cache::get('setting')->copyright_text }}</p>
                         @endif
                     </div>
                 </div>
                 <div class="col-md-5">
                     <div class="footer__bottom-menu">
+                        @if($footer_menu_three && count($footer_menu_three->menuItems) > 0)
                         <ul class="list-wrap">
                             @foreach ($footer_menu_three->menuItems as $footerMenuThree)
-                                <li><a href="{{ url($footerMenuThree?->link) }}">{{ $footerMenuThree?->label }}</a></li>
+                                <li><a href="{{ safeUrl($footerMenuThree?->link, '#') }}">{{ $footerMenuThree?->label }}</a></li>
                             @endforeach
                         </ul>
+                        @endif
                     </div>
                 </div>
             </div>

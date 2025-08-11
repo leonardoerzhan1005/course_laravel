@@ -44,8 +44,8 @@ return new class extends Migration
             
             // Курс и даты
             $table->unsignedBigInteger('course_id');
-            $table->unsignedBigInteger('specialty_id'); // ID уровня курса
-            $table->unsignedBigInteger('course_language'); // ID языка курса
+            $table->uuid('specialty_id')->nullable(); // ID специализации
+            $table->string('course_language', 8); // Код языка курса
             $table->date('seminar_start_date');
             $table->date('seminar_end_date');
             
@@ -59,8 +59,8 @@ return new class extends Migration
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
-            $table->foreign('specialty_id')->references('id')->on('course_levels')->onDelete('cascade');
-            $table->foreign('course_language')->references('id')->on('course_languages')->onDelete('cascade');
+            $table->foreign('specialty_id')->references('id')->on('specializations')->onDelete('set null');
+            $table->foreign('course_language')->references('code')->on('education_languages')->onDelete('restrict');
         });
     }
 

@@ -5,10 +5,10 @@
             <div class="col-xl-5 col-lg-6">
                 <div class="banner__content-four">
                     <h6 class="sub-title" data-aos="fade-down" data-aos-delay="600">{{__('Hi, Im')}}</h6>
-                    <h2 class="title" data-aos="fade-down" data-aos-delay="400">{!! clean(processText($hero?->content?->title)) !!}</h2>
+                    <h2 class="title" data-aos="fade-down" data-aos-delay="400">{!! safeCleanProcessText($hero?->content?->title) !!}</h2>
                     <span class="sub-title-two" data-aos="fade-down"
                         data-aos-delay="200">{{ $hero?->content?->short_title }}</span>
-                    <p data-aos="fade-up" data-aos-delay="400">{!! clean(processText($hero?->content?->sub_title)) !!}</p>
+                    <p data-aos="fade-up" data-aos-delay="400">{!! safeCleanProcessText($hero?->content?->sub_title) !!}</p>
                     <div class="banner__btn-wrap-two" data-aos="fade-up" data-aos-delay="600">
                         @if ($hero?->content?->action_button_text != null)
                             <a href="{{ $hero?->global_content?->action_button_url }}"

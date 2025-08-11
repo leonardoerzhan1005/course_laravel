@@ -30,6 +30,39 @@
 
                                         <div class="row">
                                             <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="faculty_id">{{ __('Факультет') }} <code>*</code></label>
+                                                    <select name="faculty_id" id="faculty_id" class="form-control select2" required>
+                                                        <option value="">{{ __('Выберите факультет') }}</option>
+                                                        @foreach(\App\Models\Faculty::orderBy('sort_order')->get() as $faculty)
+                                                            <option value="{{ $faculty->id }}" 
+                                                                {{ old('faculty_id', $course?->specialization?->faculty_id) == $faculty->id ? 'selected' : '' }}>
+                                                                {{ $faculty->name_ru }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label for="specialization_id">{{ __('Специализация') }} <code>*</code></label>
+                                                    <select name="specialization_id" id="specialization_id" class="form-control select2" required>
+                                                        <option value="">{{ __('Сначала выберите факультет') }}</option>
+                                                        @if($course?->specialization)
+                                                            @foreach(\App\Models\Specialization::where('faculty_id', $course->specialization->faculty_id)->orderBy('sort_order')->get() as $specialization)
+                                                                <option value="{{ $specialization->id }}" 
+                                                                    {{ old('specialization_id', $course->specialization_id) == $specialization->id ? 'selected' : '' }}>
+                                                                    {{ $specialization->name_ru }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6">
                                                 <div class="from-group">
                                                     <label for="capacity">{{ __('Capacity') }} <code></code></label>
                                                     <input id="capacity" name="capacity" class="form-control"
@@ -143,6 +176,12 @@
                                                                         </option>
                                                                     @endforeach
                                                                 </optgroup>
+                                                            @else
+                                                                {{-- Если у категории нет подкатегорий, показываем саму категорию --}}
+                                                                <option @selected($course?->category_id == $category->id)
+                                                                    value="{{ $category->id }}">
+                                                                    {{ $category->translation?->name }}
+                                                                </option>
                                                             @endif
                                                         @endforeach
                                                     </select>
@@ -250,6 +289,34 @@
                     .replace(/\s+/g, "-") // Replace spaces with -
                     .replace(/-+/g, "-"); // Replace multiple - with single -
             }
+
+            // Динамическая загрузка специализаций при выборе факультета
+            $('#faculty_id').on('change', function() {
+                const facultyId = $(this).val();
+                const $specializationSelect = $('#specialization_id');
+                
+                // Очищаем специализации
+                $specializationSelect.empty();
+                $specializationSelect.append('<option value="">{{ __("Сначала выберите факультет") }}</option>');
+                
+                if (facultyId) {
+                    // Загружаем специализации для выбранного факультета
+                    $.get('{{ route("admin.specializations.by-faculty", ["facultyId" => "FACULTY_ID_PLACEHOLDER"]) }}'.replace('FACULTY_ID_PLACEHOLDER', facultyId), function(data) {
+                        if (data.length > 0) {
+                            data.forEach(function(specialization) {
+                                const option = $('<option></option>')
+                                    .val(specialization.id)
+                                    .text(specialization.name_ru);
+                                $specializationSelect.append(option);
+                            });
+                        } else {
+                            $specializationSelect.append('<option value="" disabled>{{ __("Специализации не найдены для этого факультета") }}</option>');
+                        }
+                    }).fail(function() {
+                        $specializationSelect.append('<option value="" disabled>{{ __("Ошибка загрузки специализаций") }}</option>');
+                    });
+                }
+            });
         })
     </script>
 @endpush

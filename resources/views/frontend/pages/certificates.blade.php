@@ -1,11 +1,11 @@
 @extends('frontend.layouts.master')
 
-@section('meta_title', __('Сертификаттар'))
-@section('meta_description', __('Біздің институттан алған сертификаттарыңызды тексеріңіз және жүктеп алыңыз'))
+@section('meta_title', __('certificates.meta_title'))
+@section('meta_description', __('certificates.meta_description'))
 
 @section('contents')
 <!-- breadcrumb-area -->
-<x-frontend.breadcrumb :title="__('Сертификаттар')" :links="[['url' => route('home'), 'text' => __('Home')], ['url' => '', 'text' => __('Сертификаттар')]]" />
+<x-frontend.breadcrumb :title="__('certificates.certificates')" :links="[['url' => route('home'), 'text' => __('Home')], ['url' => '', 'text' => __('certificates.certificates')]]" />
 <!-- breadcrumb-area-end -->
 
 <!-- Certificates Section -->
@@ -14,8 +14,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-header text-center mb-5">
-                    <h1 class="display-4 fw-bold text-primary mb-3">{{ __('Сертификаттар') }}</h1>
-                    <p class="lead text-muted">{{ __('Біздің институттан алған сертификаттарыңызды тексеріңіз және жүктеп алыңыз') }}</p>
+                    <h1 class="display-4 fw-bold text-primary mb-3">{{ __('certificates.certificates') }}</h1>
+                    <p class="lead text-muted">{{ __('certificates.certificates_description') }}</p>
                 </div>
 
                 <!-- Search Section -->
@@ -23,32 +23,32 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="search-card">
-                                <h3 class="text-center mb-4">{{ __('Сертификатты іздеу') }}</h3>
+                                <h3 class="text-center mb-4">{{ __('certificates.search_certificate') }}</h3>
                                 <form id="certificateSearchForm" class="search-form">
                                     <div class="row g-3">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="certificateNumber" class="form-label">{{ __('Сертификат нөмірі') }}</label>
+                                                <label for="certificateNumber" class="form-label">{{ __('certificates.certificate_number') }}</label>
                                                 <input type="text" class="form-control" id="certificateNumber" name="certificate_number" 
                                                        placeholder="CERT-2025-001234">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="fullName" class="form-label">{{ __('Аты-жөні') }}</label>
+                                                <label for="fullName" class="form-label">{{ __('certificates.full_name') }}</label>
                                                 <input type="text" class="form-control" id="fullName" name="full_name" 
                                                        placeholder="Әлібек Серіков">
                                             </div>
                                         </div>
                                         <div class="col-12 text-center">
                                             <button type="submit" class="btn btn-primary btn-lg">
-                                                <i class="fas fa-search me-2"></i>{{ __('Іздеу') }}
+                                                <i class="fas fa-search me-2"></i>{{ __('certificates.search') }}
                                             </button>
                                         </div>
                                     </div>
                                 </form>
                                 <div class="search-examples mt-3">
-                                    <small class="text-muted">{{ __('Мысалы') }}: CERT-2025-001234, Әлібек Серіков</small>
+                                    <small class="text-muted">{{ __('certificates.search_examples') }}</small>
                                 </div>
                             </div>
                         </div>
@@ -59,51 +59,51 @@
                 <div class="search-results-section" id="searchResults" style="display: none;">
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
-                            <h3 class="text-center mb-4">{{ __('Іздеу нәтижелері') }}</h3>
+                            <h3 class="text-center mb-4">{{ __('certificates.search_results') }}</h3>
                             <div class="certificate-card">
                                 <div class="certificate-header">
                                     <div class="certificate-icon">
                                         <i class="fas fa-certificate fa-2x text-primary"></i>
                                     </div>
                                     <div class="certificate-info">
-                                        <h4 class="certificate-title">{{ __('Біліктілікті арттыру сертификаты') }}</h4>
-                                        <h5 class="certificate-holder">{{ __('Әлібек Серіков') }}</h5>
-                                        <p class="certificate-course">{{ __('Педагогтердің цифрлық құзыреттілігін дамыту') }}</p>
+                                        <h4 class="certificate-title">{{ __('certificates.advanced_training_certificate') }}</h4>
+                                        <h5 class="certificate-holder">{{ __('certificates.ali_bek_serikov') }}</h5>
+                                        <p class="certificate-course">{{ __('certificates.digital_competence_development') }}</p>
                                     </div>
                                 </div>
                                 <div class="certificate-details">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="detail-item">
-                                                <span class="detail-label">{{ __('Сертификат №') }}:</span>
+                                                <span class="detail-label">{{ __('certificates.certificate_number_label') }}</span>
                                                 <span class="detail-value">CERT-2025-001234</span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="detail-item">
-                                                <span class="detail-label">{{ __('Берілген күні') }}:</span>
+                                                <span class="detail-label">{{ __('certificates.issue_date') }}</span>
                                                 <span class="detail-value">15.03.2025</span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="detail-item">
-                                                <span class="detail-label">{{ __('Жарамдылық мерзімі') }}:</span>
+                                                <span class="detail-label">{{ __('certificates.validity_period') }}</span>
                                                 <span class="detail-value">5 жыл</span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="detail-item">
-                                                <span class="detail-label">{{ __('Статус') }}:</span>
-                                                <span class="badge bg-success">{{ __('Жарамды') }}</span>
+                                                <span class="detail-label">{{ __('certificates.status') }}</span>
+                                                <span class="badge bg-success">{{ __('certificates.valid') }}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="certificate-actions mt-4">
                                         <a href="#" class="btn btn-primary me-3">
-                                            <i class="fas fa-download me-2"></i>{{ __('Жүктеу') }}
+                                            <i class="fas fa-download me-2"></i>{{ __('certificates.download') }}
                                         </a>
                                         <a href="#" class="btn btn-outline-primary">
-                                            <i class="fas fa-eye me-2"></i>{{ __('Көру') }}
+                                            <i class="fas fa-eye me-2"></i>{{ __('certificates.view') }}
                                         </a>
                                     </div>
                                 </div>
@@ -117,11 +117,11 @@
                     <div class="row justify-content-center">
                         <div class="col-lg-8">
                             <div class="about-card">
-                                <h3 class="text-center mb-4">{{ __('Сертификат туралы') }}</h3>
+                                <h3 class="text-center mb-4">{{ __('certificates.about_certificates') }}</h3>
                                 <div class="about-content">
-                                    <p class="mb-3">{{ __('Біздің институт ұсынатын сертификаттар мемлекеттік үлгідегі құжат болып табылады және біліктілікті растайды.') }}</p>
-                                    <p class="mb-3">{{ __('Сертификат алу үшін курс бағдарламасын толық аяқтап, қорытынды тестілеуден өту қажет.') }}</p>
-                                    <p class="mb-0">{{ __('Сертификаттың түпнұсқалығын осы бетте тексеруге болады. Сертификат нөмірі немесе аты-жөніңізді енгізіңіз.') }}</p>
+                                    <p class="mb-3">{{ __('certificates.about_certificates_text1') }}</p>
+                                    <p class="mb-3">{{ __('certificates.about_certificates_text2') }}</p>
+                                    <p class="mb-0">{{ __('certificates.about_certificates_text3') }}</p>
                                 </div>
                             </div>
                         </div>
@@ -137,19 +137,19 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <h2 class="text-center mb-5">{{ __('Жиі қойылатын сұрақтар') }}</h2>
+                <h2 class="text-center mb-5">{{ __('certificates.faq_title') }}</h2>
                 
                 <div class="accordion" id="certificateFAQ">
                     <!-- FAQ Item 1 -->
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="faq1">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
-                                {{ __('Сертификатты қайдан алуға болады?') }}
+                                {{ __('certificates.faq_question1') }}
                             </button>
                         </h2>
                         <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#certificateFAQ">
                             <div class="accordion-body">
-                                {{ __('Сертификаттың түпнұсқасын курс аяқталғаннан кейін 10 жұмыс күні ішінде институт кеңсесінен алуға болады. Сондай-ақ, электрондық нұсқасын осы бетте жүктеп алуға болады.') }}
+                                {{ __('certificates.faq_answer1') }}
                             </div>
                         </div>
                     </div>
@@ -158,12 +158,12 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="faq2">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
-                                {{ __('Сертификаттың жарамдылық мерзімі қандай?') }}
+                                {{ __('certificates.faq_question2') }}
                             </button>
                         </h2>
                         <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#certificateFAQ">
                             <div class="accordion-body">
-                                {{ __('Сертификаттың жарамдылық мерзімі курс түріне байланысты. Біліктілікті арттыру курстары сертификаттарының жарамдылық мерзімі әдетте 3-5 жыл, ал тілдік курстар сертификаттарының жарамдылық мерзімі шектеусіз болады.') }}
+                                {{ __('certificates.faq_answer2') }}
                             </div>
                         </div>
                     </div>
@@ -172,12 +172,12 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="faq3">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
-                                {{ __('Сертификатты жоғалтып алсам не істеуім керек?') }}
+                                {{ __('certificates.faq_question3') }}
                             </button>
                         </h2>
                         <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#certificateFAQ">
                             <div class="accordion-body">
-                                {{ __('Сертификатты жоғалтқан жағдайда, институт кеңсесіне жазбаша өтініш беру қажет. Сертификаттың көшірмесін жасау үшін төлем алынады.') }}
+                                {{ __('certificates.faq_answer3') }}
                             </div>
                         </div>
                     </div>
@@ -186,12 +186,12 @@
                     <div class="accordion-item">
                         <h2 class="accordion-header" id="faq4">
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
-                                {{ __('Сертификаттың түпнұсқалығын қалай тексеруге болады?') }}
+                                {{ __('certificates.faq_question4') }}
                             </button>
                         </h2>
                         <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#certificateFAQ">
                             <div class="accordion-body">
-                                {{ __('Сертификаттың түпнұсқалығын осы бетте сертификат нөмірін немесе аты-жөніңізді енгізу арқылы тексеруге болады. Сондай-ақ, институт кеңсесіне хабарласуға болады.') }}
+                                {{ __('certificates.faq_answer4') }}
                             </div>
                         </div>
                     </div>
@@ -206,9 +206,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h3 class="fw-bold mb-4">{{ __('Басқа сұрақтар бойынша бізге хабарласыңыз') }}</h3>
+                <h3 class="fw-bold mb-4">{{ __('certificates.contact_questions') }}</h3>
                 <a href="{{ route('contact.index') }}" class="btn btn-primary btn-lg">
-                    <i class="fas fa-envelope me-2"></i>{{ __('Байланысқа шығу') }}
+                    <i class="fas fa-envelope me-2"></i>{{ __('certificates.contact_us') }}
                 </a>
             </div>
         </div>
@@ -406,11 +406,47 @@ document.addEventListener('DOMContentLoaded', function() {
     searchForm.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Показать результаты поиска (для демонстрации)
-        searchResults.style.display = 'block';
+        const formData = new FormData(this);
         
-        // Прокрутить к результатам
-        searchResults.scrollIntoView({ behavior: 'smooth' });
+        // Показать индикатор загрузки
+        const submitBtn = this.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Поиск...';
+        submitBtn.disabled = true;
+        
+        // Отправить AJAX запрос
+        fetch('{{ route("certificates.search") }}', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                certificate_number: formData.get('certificate_number'),
+                full_name: formData.get('full_name')
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Показать результаты
+                searchResults.style.display = 'block';
+                // Здесь можно обновить содержимое результатов
+            } else {
+                // Показать сообщение об ошибке
+                alert(data.message || 'Сертификат не найден');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Произошла ошибка при поиске');
+        })
+        .finally(() => {
+            // Восстановить кнопку
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
     });
 });
 </script>

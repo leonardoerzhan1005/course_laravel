@@ -20,9 +20,9 @@
                 <div class="choose__content-two">
                     <div class="section__title mb-20">
                         <span class="sub-title">{{ $aboutSection?->content?->short_title }}</span>
-                        <h2 class="title-two">{!! clean(processText($aboutSection?->content?->title)) !!}</h2>
+                        <h2 class="title-two">{!! safeCleanProcessText($aboutSection?->content?->title) !!}</h2>
                     </div>
-                    {!! clean(processText($aboutSection?->content?->description)) !!}
+                    {!! safeCleanProcessText($aboutSection?->content?->description) !!}
                     <div class="choose__content-inner">
                         <div class="row align-items-center gutter-20">
                             <div class="col-sm-5 order-0 order-sm-2">

@@ -5,14 +5,16 @@
                 <div class="instructor__content-wrap">
                     <div class="section__title mb-15">
                         <span class="sub-title">{{ __('Skilled Introduce') }}</span>
-                        <h2 class="title">{!! clean(processText($featuredInstructorSection?->translation?->title)) !!}</h2>
+                        <h2 class="title">{!! safeCleanProcessText($featuredInstructorSection?->translation?->title) !!}</h2>
                     </div>
-                    <p>{!! clean(processText($featuredInstructorSection?->translation?->sub_title)) !!}</p>
+                    <p>{!! safeCleanProcessText($featuredInstructorSection?->translation?->sub_title) !!}</p>
                     <div class="tg-button-wrap">
-                        <a href="{{ $featuredInstructorSection->button_url }}"
-                            class="btn arrow-btn">{{ $featuredInstructorSection?->translation?->button_text }} <img
-                                src="{{ asset('frontend/img/icons/right_arrow.svg') }}" alt="img"
-                                class="injectable"></a>
+                        @if($featuredInstructorSection && $featuredInstructorSection->button_url)
+                            <a href="{{ $featuredInstructorSection->button_url }}"
+                                class="btn arrow-btn">{{ $featuredInstructorSection?->translation?->button_text }} <img
+                                    src="{{ asset('frontend/img/icons/right_arrow.svg') }}" alt="img"
+                                    class="injectable"></a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@
         <div class="row align-items-center">
             <div class="col-lg-5">
                 <div class="fact__content-wrap">
-                    <h2 class="title">{!! clean(processText($counter?->content?->title)) !!}</h2>
+                    <h2 class="title">{!! safeCleanProcessText($counter?->content?->title) !!}</h2>
                     <p>{{$counter?->content?->description}}</p>
                     <a href="{{route('contact.index')}}" class="btn arrow-btn">{{__('Take a Tour')}} <img src="{{asset('frontend/img/icons/right_arrow.svg')}}" alt="" class="injectable"></a>
                 </div>
