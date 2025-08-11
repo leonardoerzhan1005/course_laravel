@@ -82,7 +82,10 @@ return [
     'certification' => 'State certification',
     
     'contact_title' => 'Contact Us',
-    'address' => 'Almaty, Al-Farabi Ave., 71',
+    'address_title' => 'Address',
+    'address' => 'Almaty city, Al-Farabi Ave., 71',
+    'phone_title' => 'Phone',
     'phone' => '+7 (727) 377-33-33',
+    'email_title' => 'Email',
     'email' => 'ipk@kaznu.kz',
 ];

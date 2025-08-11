@@ -82,7 +82,10 @@ return [
     'certification' => 'Государственная сертификация',
     
     'contact_title' => 'Свяжитесь с нами',
+    'address_title' => 'Адрес',
     'address' => 'г. Алматы, пр. аль-Фараби, 71',
+    'phone_title' => 'Телефон',
     'phone' => '+7 (727) 377-33-33',
+    'email_title' => 'Электронная почта',
     'email' => 'ipk@kaznu.kz',
 ];

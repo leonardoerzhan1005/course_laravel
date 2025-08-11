@@ -343,78 +343,76 @@
     <!-- History & Stats Section -->
     <section class="history-section py-5">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6 mb-4">
-                    <h2 class="display-4 fw-bold mb-4 text-primary">{{ __('home.history_title') }}</h2>
-                    <p class="lead text-muted mb-4">{{ __('home.history_text') }}</p>
-                    
-                    <div class="row g-3">
-                        <div class="col-6">
-                            <div class="text-center p-3 rounded-3 bg-primary bg-opacity-10">
-                                <h4 class="fw-bold text-primary mb-1">50+</h4>
-                                <p class="mb-0 text-muted fw-semibold">{{ __('home.teachers_count') }}</p>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div class="text-center p-3 rounded-3 bg-primary bg-opacity-10">
-                                <h4 class="fw-bold text-primary mb-1">100%</h4>
-                                <p class="mb-0 text-muted fw-semibold">{{ __('home.certification') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-6">
-                    <div class="license-card p-5 rounded-4 bg-gradient text-white text-center" style="background: linear-gradient(135deg, #1F3A8A 0%, #2E5AA0 100%);">
-                        <div class="mb-4">
-                            <i class="fas fa-certificate fa-4x text-white opacity-75"></i>
-                        </div>
-                        <h3 class="fw-bold mb-3">{{ __('home.license') }}</h3>
-                        <p class="mb-0 opacity-90">{{ __('home.license_text') }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section class="contact-section py-5 bg-light">
-        <div class="container">
             <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    <h2 class="display-4 fw-bold mb-5 text-primary">{{ __('home.contact_title') }}</h2>
+                <div class="col-lg-10 text-center">
+                    <!-- История института -->
+                    <h2 class="display-4 fw-bold mb-4 text-white">{{ __('home.history_title') }}</h2>
+                    <p class="lead text-white mb-5">{{ __('home.history_text') }}</p>
+                    
+                    <!-- Три карточки -->
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-4">
+                            <div class="history-card p-4 rounded-4 text-center">
+                                <div class="history-icon mb-3">
+                                    <i class="fas fa-certificate fa-3x text-warning"></i>
+                                </div>
+                                <h4 class="fw-bold text-white mb-2">{{ __('home.license') }}</h4>
+                                <p class="mb-0 text-white">{{ __('home.license_text') }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="history-card p-4 rounded-4 text-center">
+                                <div class="history-icon mb-3">
+                                    <i class="fas fa-users fa-3x text-warning"></i>
+                                </div>
+                                <h4 class="fw-bold text-white mb-2">50+</h4>
+                                <p class="mb-0 text-white">{{ __('home.teachers_count') }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-4">
+                            <div class="history-card p-4 rounded-4 text-center">
+                                <div class="history-icon mb-3">
+                                    <i class="fas fa-graduation-cap fa-3x text-warning"></i>
+                                </div>
+                                <h4 class="fw-bold text-white mb-2">100%</h4>
+                                <p class="mb-0 text-white">{{ __('home.certification') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Контактная информация -->
+                    <h2 class="display-4 fw-bold mb-5 text-white">{{ __('home.contact_title') }}</h2>
                     
                     <div class="row g-4">
                         <div class="col-md-4">
-                            <div class="contact-item p-4 rounded-4 bg-white shadow-sm">
+                            <div class="history-card p-4 rounded-4 text-center">
                                 <div class="contact-icon mb-3">
-                                    <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                        <i class="fas fa-map-marker-alt fa-2x text-primary"></i>
-                                    </div>
+                                    <i class="fas fa-map-marker-alt fa-2x text-warning"></i>
                                 </div>
-                                <h5 class="fw-bold mb-2">{{ __('home.address') }}</h5>
+                                <h5 class="fw-bold text-white mb-2">{{ __('home.address_title') }}</h5>
+                                <p class="mb-0 text-white">{{ __('home.address') }}</p>
                             </div>
                         </div>
                         
                         <div class="col-md-4">
-                            <div class="contact-item p-4 rounded-4 bg-white shadow-sm">
+                            <div class="history-card p-4 rounded-4 text-center">
                                 <div class="contact-icon mb-3">
-                                    <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                        <i class="fas fa-phone fa-2x text-primary"></i>
-                                    </div>
+                                    <i class="fas fa-phone fa-2x text-warning"></i>
                                 </div>
-                                <h5 class="fw-bold mb-2">{{ __('home.phone') }}</h5>
+                                <h5 class="fw-bold text-white mb-2">{{ __('home.phone_title') }}</h5>
+                                <p class="mb-0 text-white">{{ __('home.phone') }}</p>
                             </div>
                         </div>
                         
                         <div class="col-md-4">
-                            <div class="contact-item p-4 rounded-4 bg-white shadow-sm">
+                            <div class="history-card p-4 rounded-4 text-center">
                                 <div class="contact-icon mb-3">
-                                    <div class="icon-wrapper bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
-                                        <i class="fas fa-envelope fa-2x text-primary"></i>
-                                    </div>
+                                    <i class="fas fa-envelope fa-2x text-warning"></i>
                                 </div>
-                                <h5 class="fw-bold mb-2">{{ __('home.email') }}</h5>
+                                <h5 class="fw-bold text-white mb-2">{{ __('home.email_title') }}</h5>
+                                <p class="mb-0 text-white">{{ __('home.email') }}</p>
                             </div>
                         </div>
                     </div>
@@ -659,11 +657,29 @@
     background-color: white !important;
     border: 2px solid var(--primary-color) !important;
     transition: all 0.3s ease;
+    padding: 1rem;
 }
 
 .contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(31, 58, 138, 0.2);
+    transform: translateY(-3px);
+}
+
+.contact-icon {
+    margin-bottom: 1rem;
+}
+
+.contact-icon i {
+    color: #FFD700 !important; /* Желтый цвет для иконок */
+}
+
+.contact-item h5 {
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-item p {
+    font-size: 1rem;
+    line-height: 1.4;
 }
 
 .rounded-4 {
@@ -726,6 +742,78 @@
     color: white !important;
 }
 
+/* Секция истории института */
+.history-section {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%) !important;
+    color: white !important;
+    padding: 80px 0 !important;
+}
+
+/* Принудительное переопределение Bootstrap стилей */
+.history-section .history-card {
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+    transition: all 0.3s ease !important;
+    min-height: 200px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.history-section .history-card:hover {
+    transform: translateY(-5px) !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.history-section .history-icon {
+    margin-bottom: 1.5rem !important;
+}
+
+.history-section .history-icon i {
+    color: #FFD700 !important; /* Желтый цвет для иконок */
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3)) !important;
+}
+
+.history-section .history-card h4 {
+    font-size: 1.5rem !important;
+    margin-bottom: 1rem !important;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3) !important;
+    color: white !important;
+}
+
+.history-section .history-card p {
+    font-size: 1rem !important;
+    line-height: 1.4 !important;
+    opacity: 0.95 !important;
+    color: white !important;
+}
+
+/* Контактные элементы */
+.contact-item {
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    transform: translateY(-3px);
+}
+
+.contact-icon i {
+    color: #FFD700 !important; /* Желтый цвет для иконок */
+}
+
+/* Убираем старые стили */
+.license-card {
+    display: none;
+}
+
+.contact-section {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .hero-section {
         padding: 60px 0;
@@ -765,6 +853,15 @@
         min-width: 250px;
         margin-bottom: 1rem;
     }
+    
+    /* История института */
+    .history-section {
+        padding: 60px 0;
+    }
+    
+    .history-card {
+        margin-bottom: 1rem;
+    }
 }
 
 @media (max-width: 576px) {
@@ -801,6 +898,21 @@
     
     .hero-buttons .btn {
         min-width: 280px;
+    }
+    
+    /* История института */
+    .history-section {
+        padding: 40px 0;
+    }
+    
+    .history-section h2 {
+        font-size: 2rem;
+        padding: 0 15px;
+    }
+    
+    .history-section .lead {
+        font-size: 1rem;
+        padding: 0 15px;
     }
 }
 </style>

@@ -100,7 +100,7 @@
                 </li>
             @endif
 
-            {{-- @if(checkAdminHasPermission('appearance.management') || checkAdminHasPermission('section.management') || checkAdminHasPermission('footer.management') || checkAdminHasPermission('brand.managemen'))
+            @if(checkAdminHasPermission('appearance.management') || checkAdminHasPermission('section.management') || checkAdminHasPermission('footer.management') || checkAdminHasPermission('brand.managemen'))
                 <li class="menu-header">{{ __('Site Contents') }}</li>
                 @if (Module::isEnabled('SiteAppearance') && checkAdminHasPermission('appearance.management'))
                     @include('siteappearance::sidebar')
@@ -117,7 +117,7 @@
                 @if (Module::isEnabled('FooterSetting') && checkAdminHasPermission('footer.management'))
                     @include('footersetting::sidebar')
                 @endif
-            @endif --}}
+            @endif 
 
 
              @if(checkAdminHasPermission('menu.view') || checkAdminHasPermission('page.management') || checkAdminHasPermission('social.link.management') || checkAdminHasPermission('faq.view'))

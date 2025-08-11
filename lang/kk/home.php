@@ -82,7 +82,10 @@ return [
     'certification' => 'Мемлекеттік сертификация',
     
     'contact_title' => 'Бізбен байланысыңыз',
+    'address_title' => 'Мекенжай',
     'address' => 'Алматы қ., әл-Фараби даңғ., 71',
+    'phone_title' => 'Телефон',
     'phone' => '+7 (727) 377-33-33',
+    'email_title' => 'Электрондық пошта',
     'email' => 'ipk@kaznu.kz',
 ];
