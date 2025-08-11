@@ -215,7 +215,7 @@
             
             <div class="row g-4">
                 <div class="col-lg-4">
-                    <div class="testimonial-card h-100 p-4 rounded-4 shadow border-0 bg-white">
+                    <div class="testimonial-card h-100 p-4 rounded-4">
                         <div class="testimonial-quote mb-4">
                             <i class="fas fa-quote-left fa-2x text-primary opacity-25"></i>
                         </div>
@@ -235,7 +235,7 @@
                 </div>
                 
                 <div class="col-lg-4">
-                    <div class="testimonial-card h-100 p-4 rounded-4 shadow border-0 bg-white">
+                    <div class="testimonial-card h-100 p-4 rounded-4">
                         <div class="testimonial-quote mb-4">
                             <i class="fas fa-quote-left fa-2x text-primary opacity-25"></i>
                         </div>
@@ -255,7 +255,7 @@
                 </div>
                 
                 <div class="col-lg-4">
-                    <div class="testimonial-card h-100 p-4 rounded-4 shadow border-0 bg-white">
+                    <div class="testimonial-card h-100 p-4 rounded-4">
                         <div class="testimonial-quote mb-4">
                             <i class="fas fa-quote-left fa-2x text-primary opacity-25"></i>
                         </div>
@@ -290,7 +290,7 @@
                         <h2 class="display-4 fw-bold mb-2 text-primary">{{ __('home.news_title') }}</h2>
                         <p class="lead text-muted">{{ __('home.news_subtitle') }}</p>
                     </div>
-                    <a href="{{ route('blogs') }}" class="btn btn-outline-primary btn-lg px-4 py-2 fw-semibold rounded-pill">{{ __('home.all_news') }}</a>
+                    <a href="{{ route('blogs') }}" class="btn-news">{{ __('home.all_news') }}</a>
                 </div>
             </div>
             
@@ -304,13 +304,13 @@
                             <small class="text-muted fw-semibold">{{ __('home.news_1_date') }}</small>
                             <h5 class="mt-2 mb-3 fw-bold">{{ __('home.news_1_title') }}</h5>
                             <p class="text-muted mb-3">{{ __('home.news_1_desc') }}</p>
-                            <a href="#" class="btn btn-link p-0 text-primary fw-semibold text-decoration-none">{{ __('home.read_more') }} <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="#" class="btn-news">{{ __('home.read_more') }} <i class=""></i></a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-lg-4">
-                    <div class="news-card h-100 border-0 rounded-4 overflow-hidden shadow-sm bg-white hover-lift">
+                    <div class="news-card h-100  rounded-4 overflow-hidden">
                         <div class="news-image bg-primary bg-opacity-10" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             <i class="fas fa-handshake fa-3x text-primary opacity-50"></i>
                         </div>
@@ -318,13 +318,13 @@
                             <small class="text-muted fw-semibold">{{ __('home.news_2_date') }}</small>
                             <h5 class="mt-2 mb-3 fw-bold">{{ __('home.news_2_title') }}</h5>
                             <p class="text-muted mb-3">{{ __('home.news_2_desc') }}</p>
-                            <a href="#" class="btn btn-link p-0 text-primary fw-semibold text-decoration-none">{{ __('home.read_more') }} <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="#" class="btn-news">{{ __('home.read_more') }} <i class=""></i></a>
                         </div>
                     </div>
                 </div>
                 
                 <div class="col-lg-4">
-                    <div class="news-card h-100 border-0 rounded-4 overflow-hidden shadow-sm bg-white hover-lift">
+                    <div class="news-card h-100  rounded-4 overflow-hidden">
                         <div class="news-image bg-primary bg-opacity-10" style="height: 200px; display: flex; align-items: center; justify-content: center;">
                             <i class="fas fa-laptop-code fa-3x text-primary opacity-50"></i>
                         </div>
@@ -332,7 +332,7 @@
                             <small class="text-muted fw-semibold">{{ __('home.news_3_date') }}</small>
                             <h5 class="mt-2 mb-3 fw-bold">{{ __('home.news_3_title') }}</h5>
                             <p class="text-muted mb-3">{{ __('home.news_3_desc') }}</p>
-                            <a href="#" class="btn btn-link p-0 text-primary fw-semibold text-decoration-none">{{ __('home.read_more') }} <i class="fas fa-arrow-right ms-1"></i></a>
+                            <a href="#" class="btn-news">{{ __('home.read_more') }} <i class=""></i></a>
                         </div>
                     </div>
                 </div>
@@ -500,6 +500,110 @@
     box-shadow: 0 6px 20px rgba(31, 58, 138, 0.3);
 }
 
+.btn-news {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    padding: 12px 24px !important;
+    border-radius: 50px !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    font-weight: 600 !important;
+    transition: all 0.3s ease !important;
+    border: 2px solid var(--primary-color) !important;
+}
+
+.btn-news:hover {
+    background-color: white !important;
+    color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(31, 58, 138, 0.3) !important;
+    text-decoration: none !important;
+}
+
+/* Стили для новостных карточек */
+.news-card {
+    background-color: white !important;
+    border: 2px solid var(--primary-color) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(31, 58, 138, 0.1) !important;
+}
+
+.news-card:hover {
+    transform: translateY(-5px) !important;
+    background-color: white !important;
+    box-shadow: 0 8px 25px rgba(31, 58, 138, 0.2) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Стили для testimonial карточек */
+.testimonial-card {
+    background-color: white !important;
+    border: 2px solid var(--primary-color) !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 15px rgba(31, 58, 138, 0.1) !important;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px) !important;
+    background-color: white !important;
+    box-shadow: 0 8px 25px rgba(31, 58, 138, 0.2) !important;
+    border-color: var(--primary-color) !important;
+}
+
+/* Стили для текста в новостных карточках */
+.news-card h5 {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+}
+
+.news-card p {
+    color: #666 !important;
+    line-height: 1.6 !important;
+}
+
+.news-card .text-muted {
+    color: #888 !important;
+}
+
+/* Стили для текста в testimonial карточках */
+.testimonial-card h5 {
+    color: var(--primary-color) !important;
+    font-weight: 700 !important;
+}
+
+.testimonial-card p {
+    color: #666 !important;
+    line-height: 1.6 !important;
+}
+
+.testimonial-card .text-muted {
+    color: #888 !important;
+}
+
+.testimonial-card .fw-semibold {
+    color: var(--primary-color) !important;
+    font-weight: 600 !important;
+}
+
+/* Стили для иконок в testimonial карточках */
+.testimonial-card .text-primary {
+    color: var(--primary-color) !important;
+}
+
+.testimonial-card .opacity-25 {
+    opacity: 0.25 !important;
+}
+
+/* Стили для заголовков новостей */
+.news-section h2 {
+    color: var(--primary-color) !important;
+}
+
+.news-section .lead {
+    color: #666 !important;
+}
+
 .hero-section .container {
     position: relative;
     z-index: 2;
@@ -636,18 +740,6 @@
 }
 
 .testimonial-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(31, 58, 138, 0.2);
-}
-
-/* Стили для новостных карточек */
-.news-card {
-    background-color: white !important;
-    border: 2px solid var(--primary-color) !important;
-    transition: all 0.3s ease;
-}
-
-.news-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(31, 58, 138, 0.2);
 }
