@@ -13,8 +13,8 @@
                     <!-- Логотипы -->
                     <div class="hero-logos mb-5">
                         <div class="d-flex align-items-center justify-content-center gap-5">
-                            <img src="{{ asset('frontend/img/farabi_logo.png') }}" alt="FARABI Logo" class="hero-logo farabi-logo">
-                            <img src="{{ asset('frontend/img/ipk_logo.png') }}" alt="IPK Logo" class="hero-logo ipk-logo">
+                            <img src="{{ asset('frontend/img/farabi_logo.png') }}" alt="FARABI Logo" class="hero-logo farabi-logo" style="max-height: 140px !important; height: 140px !important; width: auto !important;">
+                            <img src="{{ asset('frontend/img/ipk_logo.png') }}" alt="IPK Logo" class="hero-logo ipk-logo" style="max-height: 160px !important; height: 160px !important; width: auto !important;">
                         </div>
                     </div>
                     
@@ -446,25 +446,50 @@
 
 /* Стили для логотипов */
 .hero-logos {
-    margin-bottom: 3rem;
+    margin-bottom: 3rem !important;
 }
 
 .hero-logo {
-    max-height: 100px;
-    width: auto;
-    transition: all 0.3s ease;
+    max-height: 120px !important;
+    width: auto !important;
+    transition: all 0.3s ease !important;
 }
 
 .hero-logo:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) !important;
 }
 
 .farabi-logo {
-    max-height: 110px;
+    max-height: 140px !important;
 }
 
 .ipk-logo {
-    max-height: 90px;
+    max-height: 160px !important;
+}
+
+/* Дополнительные стили для логотипов */
+.hero-logos img {
+    max-height: none !important;
+    height: auto !important;
+    width: auto !important;
+}
+
+.hero-logos .farabi-logo {
+    max-height: 140px !important;
+    height: 140px !important;
+    width: auto !important;
+}
+
+.hero-logos .ipk-logo {
+    max-height: 110px !important;
+    height: 110px !important;
+    width: auto !important;
+}
+
+/* Принудительное переопределение Bootstrap */
+.hero-logos .img-fluid {
+    max-height: none !important;
+    height: auto !important;
 }
 
 /* Заголовок */
@@ -921,19 +946,19 @@
     }
     
     .hero-logos {
-        margin-bottom: 2rem;
+        margin-bottom: 200px;
     }
     
     .hero-logo {
-        max-height: 80px;
+        max-height: 400px;
     }
     
     .farabi-logo {
-        max-height: 90px;
+        max-height: 300px;
     }
     
     .ipk-logo {
-        max-height: 70px;
+        max-height: 300px;
     }
     
     .hero-buttons {
