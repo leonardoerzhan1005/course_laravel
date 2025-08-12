@@ -29,7 +29,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="d-flex justify-content-end align-items-center">
-                            @if ($setting?->header_social_status == 'active')
+                            {{-- @if ($setting?->header_social_status == 'active')
                                 <ul class="list-inline mb-0 me-3">
                                     <li class="list-inline-item">{{ __('Follow Us On') }} :</li>
                                     @foreach (getSocialLinks() as $socialLink)
@@ -40,11 +40,11 @@
                                         </li>
                                     @endforeach
                                 </ul>
-                            @endif
-                            <div class="d-flex gap-2">
+                            @endif --}}
+                            <div class="d-flex gap-5">
                                 @if (count(allLanguages()?->where('status', 1)) > 1)
-                                    <form action="{{ route('set-language') }}" id="setLanguageHeader" class="d-inline">
-                                        <select name="code" class="form-select form-select-sm" style="width: auto;">
+                                    <form action="{{ route('set-language') }}" id="setLanguageHeader" class="d-inline me-5">
+                                        <select name="code" class="form-select form-select-sm" style="width: 100px;">
                                             @forelse (allLanguages()?->where('status', 1) as $language)
                                                 <option value="{{ $language->code }}"
                                                     {{ getSessionLanguage() == $language->code ? 'selected' : '' }}>
